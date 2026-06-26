@@ -1,0 +1,371 @@
+bash
+
+cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دکتر حسین بیدمشکی | روان‌آرا</title>
+<meta name="description" content="دکتر حسین بیدمشکی — دکترای تخصصی روانشناسی. مشاوره فردی، خانواده، لجبازی و پرخاشگری کودکان، بحران نوجوانی. تماس: 09029499239">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;color:#111;overflow-x:hidden}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:68px;border-bottom:1px solid #e8e8e8;background:#fff;position:sticky;top:0;z-index:100}
+.nav-brand{font-size:22px;font-weight:300;letter-spacing:4px;color:#0a1628;text-decoration:none}
+.nav-brand b{font-weight:700;color:#1a4fa0}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:13px;color:#555;text-decoration:none;letter-spacing:1px;transition:color .2s}
+.nav-links a:hover{color:#1a4fa0}
+.nav-cta{font-size:12px;background:#0a1628;color:#fff;padding:10px 22px;letter-spacing:1px;border:none;cursor:pointer;font-family:inherit}
+.nav-cta:hover{background:#1a4fa0}
+
+.slider{position:relative;overflow:hidden;height:540px;background:#0a1628}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;display:flex;align-items:center}
+.slide.active{opacity:1}
+.slide-overlay{position:absolute;inset:0;background:rgba(10,22,40,0.72)}
+.slide-content{position:relative;z-index:2;padding:0 4rem;max-width:620px}
+.slide-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#7EC8E3;margin-bottom:1.2rem;display:block}
+.slide-title{font-size:40px;font-weight:300;color:#fff;line-height:1.4;margin-bottom:1rem}
+.slide-title b{font-weight:700;color:#7EC8E3}
+.slide-desc{font-size:14px;color:rgba(255,255,255,0.75);line-height:2.2;margin-bottom:2rem}
+.slide-btn{display:inline-block;padding:13px 32px;border:1px solid #7EC8E3;color:#7EC8E3;font-size:12px;letter-spacing:2px;text-decoration:none;transition:all .25s;font-family:inherit}
+.slide-btn:hover{background:#7EC8E3;color:#0a1628}
+.slide-photo{position:absolute;left:3rem;bottom:0;height:500px;width:320px;object-fit:cover;object-position:top;opacity:0.9}
+.dots{position:absolute;bottom:1.5rem;right:4rem;display:flex;gap:8px;z-index:10}
+.dot{width:28px;height:2px;background:rgba(255,255,255,0.3);cursor:pointer;transition:background .3s}
+.dot.active{background:#7EC8E3}
+.slide-num{position:absolute;left:4rem;bottom:1.5rem;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;z-index:10}
+
+.marquee-bar{background:#1a4fa0;padding:0.7rem 0;overflow:hidden;white-space:nowrap}
+.marquee-inner{display:inline-flex;gap:3rem;animation:marquee 20s linear infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{font-size:12px;color:rgba(255,255,255,0.85);letter-spacing:2px}
+.marquee-sep{color:#7EC8E3;font-size:14px}
+
+.section{padding:5rem 3rem;max-width:1000px;margin:0 auto}
+.sec-label{font-size:11px;letter-spacing:3px;color:#1a4fa0;margin-bottom:0.8rem;display:block}
+.sec-title{font-size:30px;font-weight:300;color:#0a1628;line-height:1.4}
+.sec-title b{font-weight:700}
+.sec-line{width:48px;height:2px;background:#1a4fa0;margin:1rem 0 2.5rem}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-photo-wrap{position:relative}
+.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block}
+.about-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;background:#1a4fa0;color:#fff;padding:1.2rem 1.5rem;text-align:center}
+.about-badge-num{font-size:28px;font-weight:700;display:block}
+.about-badge-text{font-size:10px;letter-spacing:2px;opacity:0.8}
+.about-body{font-size:14px;color:#444;line-height:2.4;margin-bottom:1.5rem}
+.about-highlights{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem}
+.highlight-row{display:flex;align-items:center;gap:0.8rem;font-size:13px;color:#333}
+.highlight-dot{width:6px;height:6px;background:#1a4fa0;border-radius:50%;flex-shrink:0}
+
+.expertise-section{background:#f8f9fb;padding:5rem 3rem}
+.expertise-inner{max-width:1000px;margin:0 auto}
+.exp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;margin-top:3rem}
+.exp-card{background:#fff;padding:2rem 1.2rem;text-align:center;border-bottom:3px solid transparent;transition:border-color .3s,transform .3s;cursor:default}
+.exp-card:hover{border-color:#1a4fa0;transform:translateY(-4px)}
+.exp-icon-wrap{width:52px;height:52px;border:1px solid #e0e8f5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:#1a4fa0;font-size:22px}
+.exp-name{font-size:12px;font-weight:700;color:#0a1628;line-height:1.6}
+.exp-num{font-size:11px;color:#1a4fa0;margin-top:0.4rem;letter-spacing:1px}
+
+.svc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-top:3rem}
+.svc-card{padding:2rem;border:1px solid #e8edf5;position:relative;overflow:hidden;transition:border-color .3s}
+.svc-card:hover{border-color:#1a4fa0}
+.svc-num{font-size:36px;font-weight:300;color:#e0e8f5;margin-bottom:1rem;line-height:1}
+.svc-title{font-size:15px;font-weight:700;color:#0a1628;margin-bottom:0.8rem}
+.svc-body{font-size:13px;color:#777;line-height:2}
+
+.channels-section{background:#0a1628;padding:5rem 3rem}
+.channels-inner{max-width:1000px;margin:0 auto}
+.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.ch-card{border:1px solid rgba(255,255,255,0.1);padding:2rem;text-align:center;transition:border-color .3s}
+.ch-card:hover{border-color:#7EC8E3}
+.ch-icon{font-size:28px;color:#7EC8E3;margin-bottom:1rem}
+.ch-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:0.5rem}
+.ch-desc{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.9;margin-bottom:1.5rem}
+.ch-btn{display:inline-block;padding:9px 22px;border:1px solid #7EC8E3;color:#7EC8E3;font-size:11px;letter-spacing:2px;text-decoration:none;transition:all .2s}
+.ch-btn:hover{background:#7EC8E3;color:#0a1628}
+
+.contact-section{padding:5rem 3rem;max-width:1000px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem}
+.contact-info-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+.ci-icon{width:40px;height:40px;background:#f0f5ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#1a4fa0;font-size:18px}
+.ci-label{font-size:11px;letter-spacing:1px;color:#999;margin-bottom:3px}
+.ci-val{font-size:14px;color:#0a1628;font-weight:500}
+.cf-area{background:#f8f9fb;padding:2rem}
+.cf-label{font-size:11px;letter-spacing:1px;color:#888;margin-bottom:6px;display:block}
+.cf-input{width:100%;border:1px solid #dde4f0;padding:11px 14px;font-size:13px;margin-bottom:1rem;background:#fff;font-family:inherit;color:#111;outline:none}
+.cf-input:focus{border-color:#1a4fa0}
+.cf-btn{width:100%;background:#0a1628;color:#fff;padding:13px;font-size:12px;letter-spacing:2px;border:none;cursor:pointer;font-family:inherit;transition:background .2s}
+.cf-btn:hover{background:#1a4fa0}
+
+.footer{background:#060f1c;padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{font-size:16px;font-weight:300;letter-spacing:3px;color:#fff}
+.footer-brand b{color:#7EC8E3;font-weight:700}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .about-grid,.contact-grid,.svc-grid,.ch-grid{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:repeat(2,1fr)}
+  .slide-photo{display:none}
+  .section{padding:3rem 1.5rem}
+  .slide-content{padding:0 1.5rem}
+  .slide-title{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-brand"><b>روان</b>آرا</a>
+  <ul class="nav-links">
+    <li><a href="#about">درباره من</a></li>
+    <li><a href="#expertise">تخصص‌ها</a></li>
+    <li><a href="#services">خدمات</a></li>
+    <li><a href="#channels">کانال‌ها</a></li>
+    <li><a href="#contact">تماس</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">رزرو نوبت</button>
+</nav>
+
+<div class="slider" id="slider">
+  <div class="slide active" style="background:#0d1e38">
+    <div class="slide-overlay"></div>
+    <img class="slide-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
+    <div class="slide-content">
+      <span class="slide-tag">روانشناس و مشاور خانواده</span>
+      <h1 class="slide-title">دکتر <b>حسین بیدمشکی</b></h1>
+      <p class="slide-desc">فضایی امن برای رشد، شنیدن و تغییر<br>دکترای تخصصی روانشناسی — بیش از یک دهه تجربه‌ی بالینی</p>
+      <a class="slide-btn" href="#contact">رزرو مشاوره</a>
+    </div>
+  </div>
+  <div class="slide" style="background:#0a1e35">
+    <div class="slide-overlay"></div>
+    <img class="slide-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
+    <div class="slide-content">
+      <span class="slide-tag">تخصص ویژه</span>
+      <h1 class="slide-title">مدیریت <b>لجبازی و پرخاشگری</b> در کودکان</h1>
+      <p class="slide-desc">راهکارهای علمی و عملی برای والدین<br>با رویکرد ترکیبی روانشناسی و پزشکی</p>
+      <a class="slide-btn" href="#expertise">بیشتر بدانید</a>
+    </div>
+  </div>
+  <div class="slide" style="background:#071628">
+    <div class="slide-overlay"></div>
+    <img class="slide-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
+    <div class="slide-content">
+      <span class="slide-tag">مشاوره آنلاین و حضوری</span>
+      <h1 class="slide-title">همراه شما در <b>بحران‌های نوجوانی</b></h1>
+      <p class="slide-desc">هویت‌یابی، اضطراب، افسردگی و چالش‌های دوران رشد<br>کنارتان هستم — هر کجا که باشید</p>
+      <a class="slide-btn" href="#contact">تماس بگیرید</a>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+  </div>
+  <span class="slide-num" id="slide-num">01 / 03</span>
+</div>
+
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span class="marquee-item">مشاوره فردی</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">روانشناسی خانواده</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">لجبازی کودکان</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">بحران نوجوانی</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">هویت‌یابی</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">آمادگی مدرسه</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">پرخاشگری کودک</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">مشاوره فردی</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">روانشناسی خانواده</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">لجبازی کودکان</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">بحران نوجوانی</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">هویت‌یابی</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">آمادگی مدرسه</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">پرخاشگری کودک</span><span class="marquee-sep">·</span>
+  </div>
+</div>
+
+<div class="section" id="about">
+  <span class="sec-label">معرفی</span>
+  <h2 class="sec-title">آشنایی با <b>دکتر بیدمشکی</b></h2>
+  <div class="sec-line"></div>
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <img class="about-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
+      <div class="about-badge">
+        <span class="about-badge-num">+۱۵</span>
+        <span class="about-badge-text">سال تجربه</span>
+      </div>
+    </div>
+    <div>
+      <p class="about-body">به <b>مرکز مشاوره روان‌آرا</b> خوش آمدید.<br><br>من دکتر حسین بیدمشکی، دارنده‌ی دکترای تخصصی روانشناسی هستم. فراتر از یک عنوان، رسالتم ایجاد <b>«فضایی امن برای رشد و شنیدن»</b> است — همان شعاری که به آن ایمان دارم.</p>
+      <div class="about-highlights">
+        <div class="highlight-row"><span class="highlight-dot"></span>دکترای تخصصی روانشناسی بالینی</div>
+        <div class="highlight-row"><span class="highlight-dot"></span>مجری آزمون‌های MMPI، میلون و استعدادیابی</div>
+        <div class="highlight-row"><span class="highlight-dot"></span>مشاوره‌ی فردی، خانواده و فرزندپروری</div>
+        <div class="highlight-row"><span class="highlight-dot"></span>خدمات آنلاین در سراسر ایران</div>
+        <div class="highlight-row"><span class="highlight-dot"></span>مشاوره‌ی رایگان برای اقشار نیازمند</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="expertise-section" id="expertise">
+  <div class="expertise-inner">
+    <span class="sec-label">حوزه‌های تخصصی</span>
+    <h2 class="sec-title">تمرکز من روی همین <b>۵ حوزه</b> است</h2>
+    <div class="sec-line"></div>
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-icon-wrap"><i class="ti ti-mood-nervous"></i></div>
+        <div class="exp-name">بحران‌های نوجوانی</div>
+        <div class="exp-num">۰۱</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon-wrap"><i class="ti ti-id-badge-2"></i></div>
+        <div class="exp-name">هویت‌یابی کودک و نوجوان</div>
+        <div class="exp-num">۰۲</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon-wrap"><i class="ti ti-school"></i></div>
+        <div class="exp-name">آماده‌سازی برای مدرسه</div>
+        <div class="exp-num">۰۳</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon-wrap"><i class="ti ti-mood-angry"></i></div>
+        <div class="exp-name">لجبازی کودکان</div>
+        <div class="exp-num">۰۴</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon-wrap"><i class="ti ti-flame"></i></div>
+        <div class="exp-name">پرخاشگری کودک و نوجوان</div>
+        <div class="exp-num">۰۵</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="services">
+  <span class="sec-label">خدمات</span>
+  <h2 class="sec-title">چه کمکی می‌توانم <b>بکنم</b></h2>
+  <div class="sec-line"></div>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <div class="svc-title">آزمون‌های روانشناختی</div>
+      <div class="svc-body">MMPI، میلون، استعدادیابی و سلامت روان — برای خودشناسی عمیق و تشخیص دقیق</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <div class="svc-title">مشاوره فردی و آنلاین</div>
+      <div class="svc-body">اضطراب، وسواس، افسردگی و بهبود رشد فردی — حضوری یا از راه دور</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <div class="svc-title">راهنمایی فرزندپروری</div>
+      <div class="svc-body">مدیریت لجبازی، پرخاشگری و مشکلات رفتاری کودک — با رویکرد علمی و عملی</div>
+    </div>
+  </div>
+</div>
+
+<div class="channels-section" id="channels">
+  <div class="channels-inner">
+    <span class="sec-label" style="color:#7EC8E3">کانال‌های ارتباطی</span>
+    <h2 class="sec-title" style="color:#fff">محتوای رایگان — <b style="color:#7EC8E3">هر روز</b></h2>
+    <div class="sec-line" style="background:#7EC8E3"></div>
+    <div class="ch-grid">
+      <div class="ch-card">
+        <div class="ch-icon"><i class="ti ti-brand-telegram"></i></div>
+        <div class="ch-name">کانال ایتا</div>
+        <div class="ch-desc">ویدیو، پادکست و محتوای تخصصی روانشناسی روزانه</div>
+        <a class="ch-btn" href="https://eitaa.com/joinchat/1402078727C85e29da10">عضویت</a>
+      </div>
+      <div class="ch-card">
+        <div class="ch-icon"><i class="ti ti-message-circle"></i></div>
+        <div class="ch-name">کانال بله</div>
+        <div class="ch-desc">مقالات، راهنمای والدین و محتوای آموزشی رایگان</div>
+        <a class="ch-btn" href="https://ble.ir/ravanara1">عضویت</a>
+      </div>
+      <div class="ch-card">
+        <div class="ch-icon"><i class="ti ti-pencil"></i></div>
+        <div class="ch-name">وبلاگ روان‌آرا</div>
+        <div class="ch-desc">مقالات تخصصی روانشناسی خانواده، کودک و نوجوان</div>
+        <a class="ch-btn" href="http://ravanaraa.blogfa.com/">مطالعه</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-section" id="contact">
+  <span class="sec-label">تماس</span>
+  <h2 class="sec-title">رزرو <b>نوبت مشاوره</b></h2>
+  <div class="sec-line"></div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-info-row">
+        <div class="ci-icon"><i class="ti ti-phone"></i></div>
+        <div>
+          <div class="ci-label">تلفن و پیامک</div>
+          <div class="ci-val" dir="ltr">09029499239</div>
+        </div>
+      </div>
+      <div class="contact-info-row">
+        <div class="ci-icon"><i class="ti ti-brand-telegram"></i></div>
+        <div>
+          <div class="ci-label">پیام‌رسان‌ها</div>
+          <div class="ci-val">ایتا — بله — تلگرام</div>
+        </div>
+      </div>
+      <div class="contact-info-row">
+        <div class="ci-icon"><i class="ti ti-clock"></i></div>
+        <div>
+          <div class="ci-label">ساعت پاسخگویی</div>
+          <div class="ci-val">شنبه تا پنجشنبه — ۹ تا ۲۱</div>
+        </div>
+      </div>
+    </div>
+    <div class="cf-area">
+      <label class="cf-label">نام و نام‌خانوادگی</label>
+      <input class="cf-input" type="text" placeholder="مثلاً: علی رضایی">
+      <label class="cf-label">شماره تماس</label>
+      <input class="cf-input" type="text" placeholder="09xxxxxxxxx" dir="ltr">
+      <label class="cf-label">موضوع مشاوره</label>
+      <input class="cf-input" type="text" placeholder="به‌طور خلاصه بنویسید...">
+      <button class="cf-btn">ارسال درخواست</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-brand"><b>روان</b>آرا — دکتر حسین بیدمشکی</span>
+  <span class="footer-copy">تمام حقوق محفوظ است © ۱۴۰۴</span>
+</footer>
+
+<script>
+let cur=0;
+const slides=document.querySelectorAll('.slide');
+const dots=document.querySelectorAll('.dot');
+const nums=['01','02','03'];
+function goSlide(n){
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur=n;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('active');
+  document.getElementById('slide-num').textContent=nums[cur]+' / 03';
+}
+setInterval(()=>goSlide((cur+1)%3),4500);
+</script>
+</body>
+</html>
+HTMLEOF
+echo "done"
+Output
+
+done
