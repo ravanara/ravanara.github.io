@@ -1,371 +1,688 @@
-bash
-
-cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دکتر حسین بیدمشکی | روان‌آرا</title>
-<meta name="description" content="دکتر حسین بیدمشکی — دکترای تخصصی روانشناسی. مشاوره فردی، خانواده، لجبازی و پرخاشگری کودکان، بحران نوجوانی. تماس: 09029499239">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<title>روان‌آرا | دکتر حسین بیدمشکی</title>
+<meta name="description" content="روان‌آرا — فضایی امن برای رشد و شنیدن. دکتر حسین بیدمشکی، دکترای تخصصی روانشناسی. مشاوره فردی، خانواده، آزمون‌های روانشناختی. ۰۹۰۲۹۴۹۹۲۳۹">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+:root{
+  --navy:#0B1F3A;
+  --navy2:#142847;
+  --blue:#1B4F8A;
+  --steel:#4A7FB5;
+  --sky:#7EC8E3;
+  --white:#FFFFFF;
+  --off:#F4F7FB;
+  --text:#1a2a3a;
+  --muted:#7a8fa6;
+  --border:#DDE6F0;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;color:#111;overflow-x:hidden}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:68px;border-bottom:1px solid #e8e8e8;background:#fff;position:sticky;top:0;z-index:100}
-.nav-brand{font-size:22px;font-weight:300;letter-spacing:4px;color:#0a1628;text-decoration:none}
-.nav-brand b{font-weight:700;color:#1a4fa0}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-size:13px;color:#555;text-decoration:none;letter-spacing:1px;transition:color .2s}
-.nav-links a:hover{color:#1a4fa0}
-.nav-cta{font-size:12px;background:#0a1628;color:#fff;padding:10px 22px;letter-spacing:1px;border:none;cursor:pointer;font-family:inherit}
-.nav-cta:hover{background:#1a4fa0}
+html{scroll-behavior:smooth}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:var(--white);color:var(--text);overflow-x:hidden}
 
-.slider{position:relative;overflow:hidden;height:540px;background:#0a1628}
-.slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;display:flex;align-items:center}
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;transition:background .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(255,255,255,0.97);box-shadow:0 1px 0 var(--border)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-svg{width:38px;height:38px}
+.logo-text{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:2px}
+.logo-text span{color:var(--blue)}
+.nav-menu{display:flex;gap:1.8rem;list-style:none}
+.nav-menu a{font-size:13px;font-weight:500;color:var(--navy);text-decoration:none;opacity:.75;transition:opacity .2s}
+.nav-menu a:hover{opacity:1}
+.nav-btn{background:var(--navy);color:#fff;border:none;padding:9px 22px;font-size:12px;font-weight:600;font-family:inherit;letter-spacing:1px;cursor:pointer;transition:background .2s}
+.nav-btn:hover{background:var(--blue)}
+
+/* ── HERO SLIDER ── */
+.hero{position:relative;height:100vh;min-height:600px;overflow:hidden;background:var(--navy)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
 .slide.active{opacity:1}
-.slide-overlay{position:absolute;inset:0;background:rgba(10,22,40,0.72)}
-.slide-content{position:relative;z-index:2;padding:0 4rem;max-width:620px}
-.slide-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#7EC8E3;margin-bottom:1.2rem;display:block}
-.slide-title{font-size:40px;font-weight:300;color:#fff;line-height:1.4;margin-bottom:1rem}
-.slide-title b{font-weight:700;color:#7EC8E3}
-.slide-desc{font-size:14px;color:rgba(255,255,255,0.75);line-height:2.2;margin-bottom:2rem}
-.slide-btn{display:inline-block;padding:13px 32px;border:1px solid #7EC8E3;color:#7EC8E3;font-size:12px;letter-spacing:2px;text-decoration:none;transition:all .25s;font-family:inherit}
-.slide-btn:hover{background:#7EC8E3;color:#0a1628}
-.slide-photo{position:absolute;left:3rem;bottom:0;height:500px;width:320px;object-fit:cover;object-position:top;opacity:0.9}
-.dots{position:absolute;bottom:1.5rem;right:4rem;display:flex;gap:8px;z-index:10}
-.dot{width:28px;height:2px;background:rgba(255,255,255,0.3);cursor:pointer;transition:background .3s}
-.dot.active{background:#7EC8E3}
-.slide-num{position:absolute;left:4rem;bottom:1.5rem;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;z-index:10}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.slide-gradient{position:absolute;inset:0;background:linear-gradient(105deg,rgba(11,31,58,0.92) 45%,rgba(11,31,58,0.3) 100%)}
+.slide-body{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding:0 2.5rem;padding-top:64px}
+.slide-inner{max-width:600px}
+.slide-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--sky);border:1px solid rgba(126,200,227,0.4);padding:5px 14px;margin-bottom:1.5rem}
+.slide-h{font-size:clamp(28px,4vw,52px);font-weight:300;color:#fff;line-height:1.25;margin-bottom:1rem}
+.slide-h b{font-weight:800;color:var(--sky)}
+.slide-p{font-size:15px;color:rgba(255,255,255,.65);line-height:2.1;margin-bottom:2rem;max-width:480px}
+.slide-cta{display:inline-flex;align-items:center;gap:10px;padding:13px 30px;border:1.5px solid var(--sky);color:var(--sky);font-size:12px;font-weight:600;letter-spacing:2px;text-decoration:none;font-family:inherit;transition:all .3s;cursor:pointer;background:transparent}
+.slide-cta:hover{background:var(--sky);color:var(--navy)}
+.slide-cta-arrow{font-size:16px;transition:transform .3s}
+.slide-cta:hover .slide-cta-arrow{transform:translateX(-4px)}
+.hero-dots{position:absolute;bottom:2rem;right:2.5rem;display:flex;gap:8px;z-index:10}
+.hero-dot{width:24px;height:2px;background:rgba(255,255,255,.25);cursor:pointer;transition:all .3s;border:none}
+.hero-dot.active{background:var(--sky);width:40px}
+.hero-counter{position:absolute;bottom:2rem;left:2.5rem;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:3px;z-index:10}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:10;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(126,200,227,.6))}
 
-.marquee-bar{background:#1a4fa0;padding:0.7rem 0;overflow:hidden;white-space:nowrap}
-.marquee-inner{display:inline-flex;gap:3rem;animation:marquee 20s linear infinite}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.marquee-item{font-size:12px;color:rgba(255,255,255,0.85);letter-spacing:2px}
-.marquee-sep{color:#7EC8E3;font-size:14px}
+/* ── MARQUEE ── */
+.ticker{background:var(--blue);overflow:hidden;padding:.6rem 0;white-space:nowrap}
+.ticker-inner{display:inline-flex;gap:2.5rem;animation:tick 22s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{font-size:11px;font-weight:500;color:rgba(255,255,255,.8);letter-spacing:2px;text-transform:uppercase}
+.ticker-dot{color:var(--sky);font-size:6px;vertical-align:middle}
 
-.section{padding:5rem 3rem;max-width:1000px;margin:0 auto}
-.sec-label{font-size:11px;letter-spacing:3px;color:#1a4fa0;margin-bottom:0.8rem;display:block}
-.sec-title{font-size:30px;font-weight:300;color:#0a1628;line-height:1.4}
-.sec-title b{font-weight:700}
-.sec-line{width:48px;height:2px;background:#1a4fa0;margin:1rem 0 2.5rem}
+/* ── SECTIONS ── */
+.sec{padding:5rem 2.5rem;max-width:1060px;margin:0 auto}
+.sec-eye{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--blue);margin-bottom:.7rem;display:block}
+.sec-h{font-size:clamp(22px,3vw,34px);font-weight:300;color:var(--navy);line-height:1.35}
+.sec-h b{font-weight:800}
+.sec-rule{width:40px;height:2px;background:var(--blue);margin:1rem 0 2.5rem}
 
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.about-photo-wrap{position:relative}
-.about-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;display:block}
-.about-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;background:#1a4fa0;color:#fff;padding:1.2rem 1.5rem;text-align:center}
-.about-badge-num{font-size:28px;font-weight:700;display:block}
-.about-badge-text{font-size:10px;letter-spacing:2px;opacity:0.8}
-.about-body{font-size:14px;color:#444;line-height:2.4;margin-bottom:1.5rem}
-.about-highlights{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem}
-.highlight-row{display:flex;align-items:center;gap:0.8rem;font-size:13px;color:#333}
-.highlight-dot{width:6px;height:6px;background:#1a4fa0;border-radius:50%;flex-shrink:0}
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:420px 1fr;gap:5rem;align-items:start}
+.about-photo-frame{position:relative;display:inline-block}
+.about-photo{width:100%;max-width:420px;display:block;filter:grayscale(15%);transition:filter .4s}
+.about-photo:hover{filter:grayscale(0%)}
+.about-accent{position:absolute;bottom:0;left:0;width:100%;height:6px;background:linear-gradient(to right,var(--blue),var(--sky))}
+.about-badge{position:absolute;top:2rem;left:-1.5rem;background:var(--navy);color:#fff;padding:1rem 1.2rem;text-align:center;min-width:90px}
+.about-badge-n{font-size:26px;font-weight:800;color:var(--sky);display:block}
+.about-badge-t{font-size:9px;letter-spacing:2px;opacity:.7;display:block;margin-top:2px}
+.about-body{font-size:14px;color:#445;line-height:2.4;margin-bottom:1.5rem}
+.about-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2rem}
+.about-tag{font-size:12px;color:var(--blue);border:1px solid var(--border);padding:5px 14px;background:var(--off)}
 
-.expertise-section{background:#f8f9fb;padding:5rem 3rem}
-.expertise-inner{max-width:1000px;margin:0 auto}
-.exp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;margin-top:3rem}
-.exp-card{background:#fff;padding:2rem 1.2rem;text-align:center;border-bottom:3px solid transparent;transition:border-color .3s,transform .3s;cursor:default}
-.exp-card:hover{border-color:#1a4fa0;transform:translateY(-4px)}
-.exp-icon-wrap{width:52px;height:52px;border:1px solid #e0e8f5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:#1a4fa0;font-size:22px}
-.exp-name{font-size:12px;font-weight:700;color:#0a1628;line-height:1.6}
-.exp-num{font-size:11px;color:#1a4fa0;margin-top:0.4rem;letter-spacing:1px}
+/* ── EXPERTISE ── */
+.exp-bg{background:var(--off);padding:5rem 2.5rem}
+.exp-inner{max-width:1060px;margin:0 auto}
+.exp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;margin-top:2.5rem}
+.exp-card{background:#fff;padding:1.8rem 1rem;text-align:center;border:1px solid var(--border);transition:all .3s;cursor:default;position:relative;overflow:hidden}
+.exp-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transition:transform .3s}
+.exp-card:hover::after{transform:scaleX(1)}
+.exp-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,79,138,.1)}
+.exp-icon{font-size:32px;margin-bottom:1rem;line-height:1}
+.exp-name{font-size:12px;font-weight:700;color:var(--navy);line-height:1.6}
+.exp-n{display:block;font-size:10px;color:var(--steel);margin-top:.5rem;letter-spacing:2px}
 
-.svc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-top:3rem}
-.svc-card{padding:2rem;border:1px solid #e8edf5;position:relative;overflow:hidden;transition:border-color .3s}
-.svc-card:hover{border-color:#1a4fa0}
-.svc-num{font-size:36px;font-weight:300;color:#e0e8f5;margin-bottom:1rem;line-height:1}
-.svc-title{font-size:15px;font-weight:700;color:#0a1628;margin-bottom:0.8rem}
-.svc-body{font-size:13px;color:#777;line-height:2}
+/* ── SERVICES ── */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.svc-card{position:relative;overflow:hidden;border:1px solid var(--border);background:#fff}
+.svc-img{width:100%;height:180px;object-fit:cover;display:block;filter:brightness(.9) saturate(.8);transition:all .5s}
+.svc-card:hover .svc-img{filter:brightness(1) saturate(1);transform:scale(1.03)}
+.svc-body{padding:1.5rem}
+.svc-num{font-size:28px;font-weight:200;color:var(--border);margin-bottom:.5rem;line-height:1}
+.svc-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:.6rem}
+.svc-desc{font-size:12px;color:var(--muted);line-height:1.9}
 
-.channels-section{background:#0a1628;padding:5rem 3rem}
-.channels-inner{max-width:1000px;margin:0 auto}
-.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
-.ch-card{border:1px solid rgba(255,255,255,0.1);padding:2rem;text-align:center;transition:border-color .3s}
-.ch-card:hover{border-color:#7EC8E3}
-.ch-icon{font-size:28px;color:#7EC8E3;margin-bottom:1rem}
-.ch-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:0.5rem}
-.ch-desc{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.9;margin-bottom:1.5rem}
-.ch-btn{display:inline-block;padding:9px 22px;border:1px solid #7EC8E3;color:#7EC8E3;font-size:11px;letter-spacing:2px;text-decoration:none;transition:all .2s}
-.ch-btn:hover{background:#7EC8E3;color:#0a1628}
+/* ── TESTS ── */
+.tests-bg{background:var(--navy);padding:5rem 2.5rem}
+.tests-inner{max-width:1060px;margin:0 auto}
+.tests-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem}
+.test-card{border:1px solid rgba(255,255,255,.1);padding:1.4rem 1.6rem;display:flex;align-items:center;gap:1rem;transition:all .3s;text-decoration:none;background:rgba(255,255,255,.03)}
+.test-card:hover{border-color:var(--sky);background:rgba(126,200,227,.06)}
+.test-icon{width:42px;height:42px;background:rgba(126,200,227,.12);border:1px solid rgba(126,200,227,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:var(--sky)}
+.test-info{flex:1}
+.test-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px}
+.test-desc{font-size:11px;color:rgba(255,255,255,.45);line-height:1.6}
+.test-arrow{font-size:18px;color:rgba(126,200,227,.4);transition:all .3s}
+.test-card:hover .test-arrow{color:var(--sky);transform:translateX(-3px)}
 
-.contact-section{padding:5rem 3rem;max-width:1000px;margin:0 auto}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem}
-.contact-info-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
-.ci-icon{width:40px;height:40px;background:#f0f5ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#1a4fa0;font-size:18px}
-.ci-label{font-size:11px;letter-spacing:1px;color:#999;margin-bottom:3px}
-.ci-val{font-size:14px;color:#0a1628;font-weight:500}
-.cf-area{background:#f8f9fb;padding:2rem}
-.cf-label{font-size:11px;letter-spacing:1px;color:#888;margin-bottom:6px;display:block}
-.cf-input{width:100%;border:1px solid #dde4f0;padding:11px 14px;font-size:13px;margin-bottom:1rem;background:#fff;font-family:inherit;color:#111;outline:none}
-.cf-input:focus{border-color:#1a4fa0}
-.cf-btn{width:100%;background:#0a1628;color:#fff;padding:13px;font-size:12px;letter-spacing:2px;border:none;cursor:pointer;font-family:inherit;transition:background .2s}
-.cf-btn:hover{background:#1a4fa0}
+/* ── AI INTAKE ── */
+.ai-bg{background:linear-gradient(135deg,#0B1F3A 0%,#142847 100%);padding:5rem 2.5rem;position:relative;overflow:hidden}
+.ai-bg::before{content:'';position:absolute;top:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(126,200,227,.07),transparent 70%)}
+.ai-inner{max-width:800px;margin:0 auto;position:relative;z-index:1}
+.ai-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(126,200,227,.1);border:1px solid rgba(126,200,227,.25);padding:6px 16px;margin-bottom:1.5rem}
+.ai-badge-dot{width:7px;height:7px;background:var(--sky);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.ai-badge-text{font-size:10px;font-weight:600;letter-spacing:2px;color:var(--sky);text-transform:uppercase}
+.ai-h{font-size:clamp(20px,3vw,32px);font-weight:300;color:#fff;line-height:1.4;margin-bottom:.8rem}
+.ai-h b{font-weight:800;color:var(--sky)}
+.ai-p{font-size:13px;color:rgba(255,255,255,.55);line-height:2;margin-bottom:2rem;max-width:580px}
+.ai-form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:2rem}
+.ai-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.ai-group{display:flex;flex-direction:column;gap:6px}
+.ai-label{font-size:10px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,.45);text-transform:uppercase}
+.ai-input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 14px;font-size:13px;font-family:inherit;outline:none;transition:border-color .2s;width:100%}
+.ai-input:focus{border-color:rgba(126,200,227,.5)}
+.ai-input::placeholder{color:rgba(255,255,255,.2)}
+.ai-select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 14px;font-size:13px;font-family:inherit;outline:none;width:100%}
+.ai-select option{background:#0B1F3A;color:#fff}
+.ai-textarea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 14px;font-size:13px;font-family:inherit;outline:none;width:100%;resize:none;height:90px;transition:border-color .2s}
+.ai-textarea:focus{border-color:rgba(126,200,227,.5)}
+.ai-textarea::placeholder{color:rgba(255,255,255,.2)}
+.ai-submit{background:var(--sky);color:var(--navy);border:none;padding:13px 32px;font-size:12px;font-weight:700;font-family:inherit;letter-spacing:2px;cursor:pointer;transition:all .3s;margin-top:1rem;display:flex;align-items:center;gap:8px}
+.ai-submit:hover{background:#fff}
+.ai-note{font-size:11px;color:rgba(255,255,255,.3);margin-top:.8rem;line-height:1.7}
 
-.footer{background:#060f1c;padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between}
-.footer-brand{font-size:16px;font-weight:300;letter-spacing:3px;color:#fff}
-.footer-brand b{color:#7EC8E3;font-weight:700}
-.footer-copy{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px}
+/* ── CHANNELS ── */
+.ch-bg{background:var(--off);padding:5rem 2.5rem}
+.ch-inner{max-width:1060px;margin:0 auto}
+.ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.ch-card{background:#fff;border:1px solid var(--border);padding:2rem;text-align:center;transition:all .3s}
+.ch-card:hover{border-color:var(--steel);transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,79,138,.08)}
+.ch-icon-wrap{width:56px;height:56px;background:var(--off);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:24px;transition:all .3s}
+.ch-card:hover .ch-icon-wrap{background:var(--navy);border-color:var(--navy)}
+.ch-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.ch-desc{font-size:12px;color:var(--muted);line-height:1.9;margin-bottom:1.3rem}
+.ch-btn{display:inline-block;padding:8px 20px;border:1.5px solid var(--navy);color:var(--navy);font-size:11px;font-weight:700;letter-spacing:1.5px;text-decoration:none;transition:all .2s;font-family:inherit}
+.ch-btn:hover{background:var(--navy);color:#fff}
 
-@media(max-width:768px){
-  .nav-links{display:none}
-  .about-grid,.contact-grid,.svc-grid,.ch-grid{grid-template-columns:1fr}
-  .exp-grid{grid-template-columns:repeat(2,1fr)}
-  .slide-photo{display:none}
-  .section{padding:3rem 1.5rem}
-  .slide-content{padding:0 1.5rem}
-  .slide-title{font-size:26px}
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:2.5rem}
+.contact-item{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
+.ci-icon{width:44px;height:44px;background:var(--off);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:var(--blue)}
+.ci-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ci-val{font-size:14px;font-weight:600;color:var(--navy)}
+.cf{background:var(--off);border:1px solid var(--border);padding:2rem}
+.cf-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.cf-input{width:100%;border:1px solid var(--border);padding:11px 14px;font-size:13px;margin-bottom:1rem;background:#fff;font-family:inherit;color:var(--text);outline:none;transition:border-color .2s}
+.cf-input:focus{border-color:var(--blue)}
+.cf-btn{width:100%;background:var(--navy);color:#fff;padding:13px;font-size:12px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;font-family:inherit;transition:background .2s}
+.cf-btn:hover{background:var(--blue)}
+
+/* ── FOOTER ── */
+.footer{background:var(--navy);padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-size:16px;font-weight:700;color:#fff;letter-spacing:2px}
+.footer-logo span{color:var(--sky)}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:repeat(3,1fr)}
+  .svc-grid,.contact-grid,.ch-grid,.tests-grid{grid-template-columns:1fr}
+  .nav-menu{display:none}
+  .ai-row{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <a href="#" class="nav-brand"><b>روان</b>آرا</a>
-  <ul class="nav-links">
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="logo">
+    <svg class="logo-svg" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="19" cy="19" r="18" stroke="#1B4F8A" stroke-width="1.5"/>
+      <path d="M10 24 C10 14 14 10 19 10 C24 10 28 14 28 19 C28 24 24 26 19 26" stroke="#7EC8E3" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="19" cy="26" r="2.5" fill="#1B4F8A"/>
+      <path d="M13 19 Q16 15 19 19 Q22 23 25 19" stroke="#1B4F8A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="logo-text"><span>روان</span>آرا</span>
+  </a>
+  <ul class="nav-menu">
     <li><a href="#about">درباره من</a></li>
     <li><a href="#expertise">تخصص‌ها</a></li>
     <li><a href="#services">خدمات</a></li>
+    <li><a href="#tests">آزمون‌ها</a></li>
     <li><a href="#channels">کانال‌ها</a></li>
     <li><a href="#contact">تماس</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">رزرو نوبت</button>
+  <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">رزرو نوبت</button>
 </nav>
 
-<div class="slider" id="slider">
-  <div class="slide active" style="background:#0d1e38">
-    <div class="slide-overlay"></div>
-    <img class="slide-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
-    <div class="slide-content">
-      <span class="slide-tag">روانشناس و مشاور خانواده</span>
-      <h1 class="slide-title">دکتر <b>حسین بیدمشکی</b></h1>
-      <p class="slide-desc">فضایی امن برای رشد، شنیدن و تغییر<br>دکترای تخصصی روانشناسی — بیش از یک دهه تجربه‌ی بالینی</p>
-      <a class="slide-btn" href="#contact">رزرو مشاوره</a>
+<!-- HERO SLIDER -->
+<section class="hero" id="hero">
+  <div class="slide active">
+    <div class="slide-bg" style="background:linear-gradient(135deg,#0B1F3A,#1B4F8A)"></div>
+    <div class="slide-gradient"></div>
+    <div class="slide-body">
+      <div class="slide-inner">
+        <span class="slide-tag">روانشناس و مشاور خانواده</span>
+        <h1 class="slide-h">دکتر <b>حسین بیدمشکی</b><br>در خدمت خانواده‌های ایرانی</h1>
+        <p class="slide-p">رسالتم ایجاد فضایی امن برای رشد و شنیدن است<br>بیش از یک دهه تجربه‌ی بالینی — مشاوره حضوری و آنلاین</p>
+        <a class="slide-cta" href="#contact">رزرو مشاوره <span class="slide-cta-arrow">←</span></a>
+      </div>
     </div>
   </div>
-  <div class="slide" style="background:#0a1e35">
-    <div class="slide-overlay"></div>
-    <img class="slide-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
-    <div class="slide-content">
-      <span class="slide-tag">تخصص ویژه</span>
-      <h1 class="slide-title">مدیریت <b>لجبازی و پرخاشگری</b> در کودکان</h1>
-      <p class="slide-desc">راهکارهای علمی و عملی برای والدین<br>با رویکرد ترکیبی روانشناسی و پزشکی</p>
-      <a class="slide-btn" href="#expertise">بیشتر بدانید</a>
+  <div class="slide">
+    <div class="slide-bg" style="background:linear-gradient(135deg,#0B1F3A,#0d3460)"></div>
+    <div class="slide-gradient"></div>
+    <div class="slide-body">
+      <div class="slide-inner">
+        <span class="slide-tag">تخصص ویژه</span>
+        <h1 class="slide-h">مدیریت <b>لجبازی و پرخاشگری</b><br>در کودکان</h1>
+        <p class="slide-p">راهکارهای علمی و عملی برای والدین<br>با رویکرد ترکیبی روانشناسی بالینی</p>
+        <a class="slide-cta" href="#expertise">بیشتر بدانید <span class="slide-cta-arrow">←</span></a>
+      </div>
     </div>
   </div>
-  <div class="slide" style="background:#071628">
-    <div class="slide-overlay"></div>
-    <img class="slide-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
-    <div class="slide-content">
-      <span class="slide-tag">مشاوره آنلاین و حضوری</span>
-      <h1 class="slide-title">همراه شما در <b>بحران‌های نوجوانی</b></h1>
-      <p class="slide-desc">هویت‌یابی، اضطراب، افسردگی و چالش‌های دوران رشد<br>کنارتان هستم — هر کجا که باشید</p>
-      <a class="slide-btn" href="#contact">تماس بگیرید</a>
+  <div class="slide">
+    <div class="slide-bg" style="background:linear-gradient(135deg,#071628,#0B1F3A)"></div>
+    <div class="slide-gradient"></div>
+    <div class="slide-body">
+      <div class="slide-inner">
+        <span class="slide-tag">آزمون‌های تخصصی آنلاین</span>
+        <h1 class="slide-h">خودشناسی با <b>آزمون‌های</b><br>معتبر روانشناختی</h1>
+        <p class="slide-p">MMPI، میلون، کتل، هالند و بیشتر<br>همین الان آنلاین شرکت کنید</p>
+        <a class="slide-cta" href="#tests">مشاهده آزمون‌ها <span class="slide-cta-arrow">←</span></a>
+      </div>
     </div>
   </div>
-  <div class="dots">
-    <div class="dot active" onclick="goSlide(0)"></div>
-    <div class="dot" onclick="goSlide(1)"></div>
-    <div class="dot" onclick="goSlide(2)"></div>
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="goSlide(0)"></button>
+    <button class="hero-dot" onclick="goSlide(1)"></button>
+    <button class="hero-dot" onclick="goSlide(2)"></button>
   </div>
-  <span class="slide-num" id="slide-num">01 / 03</span>
+  <span class="hero-counter" id="hc">01 — 03</span>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">مشاوره فردی</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">روانشناسی خانواده</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">لجبازی کودکان</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">بحران نوجوانی</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">هویت‌یابی</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">آزمون MMPI</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">پرخاشگری کودک</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">آزمون میلون</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">آمادگی مدرسه</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">سلامت روان</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">مشاوره فردی</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">روانشناسی خانواده</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">لجبازی کودکان</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">بحران نوجوانی</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">هویت‌یابی</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">آزمون MMPI</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">پرخاشگری کودک</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">آزمون میلون</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">آمادگی مدرسه</span><span class="ticker-dot">●</span>
+    <span class="ticker-item">سلامت روان</span><span class="ticker-dot">●</span>
+  </div>
 </div>
 
-<div class="marquee-bar">
-  <div class="marquee-inner">
-    <span class="marquee-item">مشاوره فردی</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">روانشناسی خانواده</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">لجبازی کودکان</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">بحران نوجوانی</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">هویت‌یابی</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">آمادگی مدرسه</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">پرخاشگری کودک</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">مشاوره فردی</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">روانشناسی خانواده</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">لجبازی کودکان</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">بحران نوجوانی</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">هویت‌یابی</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">آمادگی مدرسه</span><span class="marquee-sep">·</span>
-    <span class="marquee-item">پرخاشگری کودک</span><span class="marquee-sep">·</span>
-  </div>
-</div>
-
-<div class="section" id="about">
-  <span class="sec-label">معرفی</span>
-  <h2 class="sec-title">آشنایی با <b>دکتر بیدمشکی</b></h2>
-  <div class="sec-line"></div>
+<!-- ABOUT -->
+<section id="about">
+<div class="sec">
+  <span class="sec-eye">درباره من</span>
+  <h2 class="sec-h">آشنایی با <b>دکتر بیدمشکی</b></h2>
+  <div class="sec-rule"></div>
   <div class="about-grid">
-    <div class="about-photo-wrap">
+    <div class="about-photo-frame">
       <img class="about-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی">
+      <div class="about-accent"></div>
       <div class="about-badge">
-        <span class="about-badge-num">+۱۵</span>
-        <span class="about-badge-text">سال تجربه</span>
+        <span class="about-badge-n">+۱۵</span>
+        <span class="about-badge-t">سال تجربه</span>
       </div>
     </div>
     <div>
-      <p class="about-body">به <b>مرکز مشاوره روان‌آرا</b> خوش آمدید.<br><br>من دکتر حسین بیدمشکی، دارنده‌ی دکترای تخصصی روانشناسی هستم. فراتر از یک عنوان، رسالتم ایجاد <b>«فضایی امن برای رشد و شنیدن»</b> است — همان شعاری که به آن ایمان دارم.</p>
-      <div class="about-highlights">
-        <div class="highlight-row"><span class="highlight-dot"></span>دکترای تخصصی روانشناسی بالینی</div>
-        <div class="highlight-row"><span class="highlight-dot"></span>مجری آزمون‌های MMPI، میلون و استعدادیابی</div>
-        <div class="highlight-row"><span class="highlight-dot"></span>مشاوره‌ی فردی، خانواده و فرزندپروری</div>
-        <div class="highlight-row"><span class="highlight-dot"></span>خدمات آنلاین در سراسر ایران</div>
-        <div class="highlight-row"><span class="highlight-dot"></span>مشاوره‌ی رایگان برای اقشار نیازمند</div>
+      <p class="about-body">
+        به <strong>مرکز مشاوره روان‌آرا</strong> خوش آمدید.<br><br>
+        من دکتر حسین بیدمشکی، دارنده‌ی دکترای تخصصی روانشناسی هستم. فراتر از یک عنوان، رسالتم ایجاد <strong>«فضایی امن برای رشد و شنیدن»</strong> است — همان شعاری که سال‌هاست به آن ایمان دارم.<br><br>
+        در طول سال‌های فعالیت بالینی، با صدها خانواده در مسیر فرزندپروری بهتر، مدیریت رفتار کودک، بحران‌های نوجوانی و بهبود روابط زناشویی همراه بوده‌ام. تخصص من ترکیب دانش روانشناسی با نگاه انسانی و گرم به مشکلات واقعی زندگی است.
+      </p>
+      <div class="about-tags">
+        <span class="about-tag">دکترای تخصصی روانشناسی</span>
+        <span class="about-tag">آزمون‌های MMPI و میلون</span>
+        <span class="about-tag">مشاوره فرزندپروری</span>
+        <span class="about-tag">خدمات آنلاین سراسری</span>
+        <span class="about-tag">مشاوره رایگان برای نیازمندان</span>
+        <span class="about-tag">بسیج جامعه پزشکی</span>
       </div>
     </div>
   </div>
 </div>
+</section>
 
-<div class="expertise-section" id="expertise">
-  <div class="expertise-inner">
-    <span class="sec-label">حوزه‌های تخصصی</span>
-    <h2 class="sec-title">تمرکز من روی همین <b>۵ حوزه</b> است</h2>
-    <div class="sec-line"></div>
-    <div class="exp-grid">
-      <div class="exp-card">
-        <div class="exp-icon-wrap"><i class="ti ti-mood-nervous"></i></div>
-        <div class="exp-name">بحران‌های نوجوانی</div>
-        <div class="exp-num">۰۱</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon-wrap"><i class="ti ti-id-badge-2"></i></div>
-        <div class="exp-name">هویت‌یابی کودک و نوجوان</div>
-        <div class="exp-num">۰۲</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon-wrap"><i class="ti ti-school"></i></div>
-        <div class="exp-name">آماده‌سازی برای مدرسه</div>
-        <div class="exp-num">۰۳</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon-wrap"><i class="ti ti-mood-angry"></i></div>
-        <div class="exp-name">لجبازی کودکان</div>
-        <div class="exp-num">۰۴</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon-wrap"><i class="ti ti-flame"></i></div>
-        <div class="exp-name">پرخاشگری کودک و نوجوان</div>
-        <div class="exp-num">۰۵</div>
-      </div>
+<!-- EXPERTISE -->
+<div class="exp-bg" id="expertise">
+<div class="exp-inner">
+  <span class="sec-eye">حوزه‌های تخصصی</span>
+  <h2 class="sec-h">تمرکز من روی همین <b>۵ حوزه</b> است</h2>
+  <div class="sec-rule"></div>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <div class="exp-icon">🌊</div>
+      <div class="exp-name">بحران‌های نوجوانی</div>
+      <span class="exp-n">۰۱</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🧭</div>
+      <div class="exp-name">هویت‌یابی کودک و نوجوان</div>
+      <span class="exp-n">۰۲</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🎒</div>
+      <div class="exp-name">آماده‌سازی برای مدرسه</div>
+      <span class="exp-n">۰۳</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🔁</div>
+      <div class="exp-name">لجبازی کودکان</div>
+      <span class="exp-n">۰۴</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">⚡</div>
+      <div class="exp-name">پرخاشگری کودک و نوجوان</div>
+      <span class="exp-n">۰۵</span>
     </div>
   </div>
 </div>
+</div>
 
-<div class="section" id="services">
-  <span class="sec-label">خدمات</span>
-  <h2 class="sec-title">چه کمکی می‌توانم <b>بکنم</b></h2>
-  <div class="sec-line"></div>
+<!-- SERVICES -->
+<section id="services">
+<div class="sec">
+  <span class="sec-eye">خدمات</span>
+  <h2 class="sec-h">چه کمکی می‌توانم <b>بکنم</b></h2>
+  <div class="sec-rule"></div>
   <div class="svc-grid">
     <div class="svc-card">
-      <div class="svc-num">01</div>
-      <div class="svc-title">آزمون‌های روانشناختی</div>
-      <div class="svc-body">MMPI، میلون، استعدادیابی و سلامت روان — برای خودشناسی عمیق و تشخیص دقیق</div>
+      <img class="svc-img" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="مشاوره فردی">
+      <div class="svc-body">
+        <div class="svc-num">01</div>
+        <div class="svc-title">مشاوره فردی و آنلاین</div>
+        <div class="svc-desc">اضطراب، وسواس، افسردگی و بهبود رشد فردی — حضوری یا از راه دور در سراسر ایران</div>
+      </div>
     </div>
     <div class="svc-card">
-      <div class="svc-num">02</div>
-      <div class="svc-title">مشاوره فردی و آنلاین</div>
-      <div class="svc-body">اضطراب، وسواس، افسردگی و بهبود رشد فردی — حضوری یا از راه دور</div>
+      <img class="svc-img" src="https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?w=600&q=80" alt="راهنمایی خانواده">
+      <div class="svc-body">
+        <div class="svc-num">02</div>
+        <div class="svc-title">راهنمایی فرزندپروری</div>
+        <div class="svc-desc">مدیریت لجبازی، پرخاشگری و مشکلات رفتاری کودک — با رویکرد علمی و عملی برای والدین</div>
+      </div>
     </div>
     <div class="svc-card">
-      <div class="svc-num">03</div>
-      <div class="svc-title">راهنمایی فرزندپروری</div>
-      <div class="svc-body">مدیریت لجبازی، پرخاشگری و مشکلات رفتاری کودک — با رویکرد علمی و عملی</div>
-    </div>
-  </div>
-</div>
-
-<div class="channels-section" id="channels">
-  <div class="channels-inner">
-    <span class="sec-label" style="color:#7EC8E3">کانال‌های ارتباطی</span>
-    <h2 class="sec-title" style="color:#fff">محتوای رایگان — <b style="color:#7EC8E3">هر روز</b></h2>
-    <div class="sec-line" style="background:#7EC8E3"></div>
-    <div class="ch-grid">
-      <div class="ch-card">
-        <div class="ch-icon"><i class="ti ti-brand-telegram"></i></div>
-        <div class="ch-name">کانال ایتا</div>
-        <div class="ch-desc">ویدیو، پادکست و محتوای تخصصی روانشناسی روزانه</div>
-        <a class="ch-btn" href="https://eitaa.com/joinchat/1402078727C85e29da10">عضویت</a>
-      </div>
-      <div class="ch-card">
-        <div class="ch-icon"><i class="ti ti-message-circle"></i></div>
-        <div class="ch-name">کانال بله</div>
-        <div class="ch-desc">مقالات، راهنمای والدین و محتوای آموزشی رایگان</div>
-        <a class="ch-btn" href="https://ble.ir/ravanara1">عضویت</a>
-      </div>
-      <div class="ch-card">
-        <div class="ch-icon"><i class="ti ti-pencil"></i></div>
-        <div class="ch-name">وبلاگ روان‌آرا</div>
-        <div class="ch-desc">مقالات تخصصی روانشناسی خانواده، کودک و نوجوان</div>
-        <a class="ch-btn" href="http://ravanaraa.blogfa.com/">مطالعه</a>
+      <img class="svc-img" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80" alt="آزمون روانشناختی">
+      <div class="svc-body">
+        <div class="svc-num">03</div>
+        <div class="svc-title">آزمون‌های روانشناختی</div>
+        <div class="svc-desc">MMPI، میلون، کتل و استعدادیابی — برای خودشناسی عمیق‌تر و تشخیص دقیق‌تر</div>
       </div>
     </div>
   </div>
 </div>
+</section>
 
-<div class="contact-section" id="contact">
-  <span class="sec-label">تماس</span>
-  <h2 class="sec-title">رزرو <b>نوبت مشاوره</b></h2>
-  <div class="sec-line"></div>
+<!-- TESTS -->
+<section id="tests">
+<div class="tests-bg">
+<div class="tests-inner">
+  <span class="sec-eye" style="color:var(--sky)">آزمون‌های آنلاین</span>
+  <h2 class="sec-h" style="color:#fff">آزمون‌های تخصصی <b style="color:var(--sky)">رایگان</b></h2>
+  <div class="sec-rule" style="background:var(--sky)"></div>
+  <div class="tests-grid">
+    <a class="test-card" href="https://forms.gle/ruBGXshy9yrxdZDo8" target="_blank">
+      <div class="test-icon">🧒</div>
+      <div class="test-info">
+        <div class="test-name">پرسشنامه سلامت روان کودکان ۷ تا ۱۱ سال</div>
+        <div class="test-desc">ویژه والدین — ارزیابی سلامت روان فرزند</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/rGEZFXfg9x84K8uF7" target="_blank">
+      <div class="test-icon">🌿</div>
+      <div class="test-info">
+        <div class="test-name">پرسشنامه سبک زندگی (LSQ)</div>
+        <div class="test-desc">بررسی الگوهای رفتاری و سبک زندگی</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/ENnsYGKJx3nRXivTA" target="_blank">
+      <div class="test-icon">🧠</div>
+      <div class="test-info">
+        <div class="test-name">آزمون شخصیت MMPI (۷۱ سوالی)</div>
+        <div class="test-desc">معتبرترین آزمون شخصیت‌شناسی جهان</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/wzgiaz52MG5mAg4E6" target="_blank">
+      <div class="test-icon">🎯</div>
+      <div class="test-info">
+        <div class="test-name">آزمون انتخاب شغل و رشته — هالند</div>
+        <div class="test-desc">کشف علایق شغلی و رشته تحصیلی مناسب</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/CwniFkNnwy6k9aLj9" target="_blank">
+      <div class="test-icon">📊</div>
+      <div class="test-info">
+        <div class="test-name">آزمون شخصیت کتل (16PF)</div>
+        <div class="test-desc">شناخت ۱۶ بعد شخصیتی با دقت بالا</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/e5HEnnGnpVUxCGgA9" target="_blank">
+      <div class="test-icon">🔬</div>
+      <div class="test-info">
+        <div class="test-name">پرسشنامه بالینی میلون ۳ (MCMI-III)</div>
+        <div class="test-desc">ارزیابی اختلالات شخصیت و سندرم‌های بالینی</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/c7MDbZReECZQAHic6" target="_blank">
+      <div class="test-icon">💆</div>
+      <div class="test-info">
+        <div class="test-name">مقیاس استرس ادراک‌شده (PSS)</div>
+        <div class="test-desc">اندازه‌گیری میزان استرس ذهنی در زندگی</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/FRgRYfDzLot3qxD69" target="_blank">
+      <div class="test-icon">😴</div>
+      <div class="test-info">
+        <div class="test-name">پرسشنامه کیفیت خواب (PSQI)</div>
+        <div class="test-desc">ارزیابی الگو و کیفیت خواب شما</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/1Mq2XM9Fu9hBCHN4A" target="_blank">
+      <div class="test-icon">💼</div>
+      <div class="test-info">
+        <div class="test-name">پرسشنامه استرس شغلی (PSS-10)</div>
+        <div class="test-desc">پژوهش مدیریت استرس در محیط کار</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+    <a class="test-card" href="https://forms.gle/qBDRZUthwi5tDGcd6" target="_blank">
+      <div class="test-icon">🌸</div>
+      <div class="test-info">
+        <div class="test-name">پرسشنامه علل سقط جنین (مرکز نفس)</div>
+        <div class="test-desc">بررسی تخصصی انگیزه‌ها و عوامل مؤثر</div>
+      </div>
+      <span class="test-arrow">←</span>
+    </a>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- AI INTAKE -->
+<section id="ai">
+<div class="ai-bg">
+<div class="ai-inner">
+  <div class="ai-badge">
+    <span class="ai-badge-dot"></span>
+    <span class="ai-badge-text">هوش مصنوعی روان‌آرا</span>
+  </div>
+  <h2 class="ai-h">اولین قدم مشاوره را<br><b>همین‌جا بردارید</b></h2>
+  <p class="ai-p">قبل از جلسه‌ی مشاوره، چند سوال کوتاه از شما می‌پرسیم تا دکتر بیدمشکی با آمادگی بیشتری در کنارتان باشد. اطلاعات شما محرمانه و فقط در اختیار دکتر است.</p>
+  <div class="ai-form">
+    <div class="ai-row">
+      <div class="ai-group">
+        <label class="ai-label">نام و نام‌خانوادگی</label>
+        <input class="ai-input" type="text" placeholder="مثلاً: علی رضایی" id="ai-name">
+      </div>
+      <div class="ai-group">
+        <label class="ai-label">سن</label>
+        <input class="ai-input" type="number" placeholder="مثلاً: ۳۵" id="ai-age" min="1" max="100">
+      </div>
+    </div>
+    <div class="ai-row">
+      <div class="ai-group">
+        <label class="ai-label">جنسیت</label>
+        <select class="ai-select" id="ai-gender">
+          <option value="">انتخاب کنید...</option>
+          <option value="male">مرد</option>
+          <option value="female">زن</option>
+        </select>
+      </div>
+      <div class="ai-group">
+        <label class="ai-label">وضعیت تأهل</label>
+        <select class="ai-select" id="ai-marital">
+          <option value="">انتخاب کنید...</option>
+          <option value="single">مجرد</option>
+          <option value="married">متأهل</option>
+          <option value="divorced">مطلقه</option>
+          <option value="widowed">بیوه</option>
+        </select>
+      </div>
+    </div>
+    <div class="ai-group" style="margin-bottom:1rem">
+      <label class="ai-label">موضوع اصلی مراجعه</label>
+      <select class="ai-select" id="ai-topic">
+        <option value="">انتخاب کنید...</option>
+        <option>لجبازی و رفتار کودک</option>
+        <option>بحران نوجوانی</option>
+        <option>اضطراب و نگرانی</option>
+        <option>افسردگی</option>
+        <option>مشکلات زناشویی</option>
+        <option>هویت‌یابی</option>
+        <option>استرس شغلی</option>
+        <option>کیفیت خواب</option>
+        <option>سایر</option>
+      </select>
+    </div>
+    <div class="ai-group">
+      <label class="ai-label">توضیح مختصر (اختیاری)</label>
+      <textarea class="ai-textarea" id="ai-desc" placeholder="هر چیزی که فکر می‌کنید دکتر باید بداند..."></textarea>
+    </div>
+    <button class="ai-submit" onclick="submitAI()">
+      <span>ارسال اطلاعات</span>
+      <span>←</span>
+    </button>
+    <p class="ai-note">🔒 اطلاعات شما کاملاً محرمانه است و فقط برای آماده‌سازی جلسه‌ی مشاوره استفاده می‌شود.</p>
+  </div>
+  <div id="ai-result" style="display:none;margin-top:1.5rem;background:rgba(126,200,227,.1);border:1px solid rgba(126,200,227,.3);padding:1.5rem;color:#fff;font-size:14px;line-height:2"></div>
+</div>
+</div>
+</section>
+
+<!-- CHANNELS -->
+<div class="ch-bg" id="channels">
+<div class="ch-inner">
+  <span class="sec-eye">کانال‌های ارتباطی</span>
+  <h2 class="sec-h">محتوای رایگان — <b>هر روز</b></h2>
+  <div class="sec-rule"></div>
+  <div class="ch-grid">
+    <div class="ch-card">
+      <div class="ch-icon-wrap">📱</div>
+      <div class="ch-name">کانال ایتا</div>
+      <div class="ch-desc">ویدیو، پادکست و محتوای تخصصی روانشناسی روزانه — به زبان ساده برای همه</div>
+      <a class="ch-btn" href="https://eitaa.com/joinchat/1402078727C85e29da10" target="_blank">عضویت</a>
+    </div>
+    <div class="ch-card">
+      <div class="ch-icon-wrap">💬</div>
+      <div class="ch-name">کانال بله</div>
+      <div class="ch-desc">مقالات، راهنمای والدین و محتوای آموزشی رایگان — همراه خانواده‌های ایرانی</div>
+      <a class="ch-btn" href="https://ble.ir/ravanara1" target="_blank">عضویت</a>
+    </div>
+    <div class="ch-card">
+      <div class="ch-icon-wrap">✍️</div>
+      <div class="ch-name">وبلاگ روان‌آرا</div>
+      <div class="ch-desc">مقالات تخصصی روانشناسی خانواده، کودک و نوجوان — آرشیوی ارزشمند برای والدین</div>
+      <a class="ch-btn" href="http://ravanaraa.blogfa.com/" target="_blank">مطالعه</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+<div class="sec">
+  <span class="sec-eye">تماس</span>
+  <h2 class="sec-h">رزرو <b>نوبت مشاوره</b></h2>
+  <div class="sec-rule"></div>
   <div class="contact-grid">
     <div>
-      <div class="contact-info-row">
-        <div class="ci-icon"><i class="ti ti-phone"></i></div>
+      <div class="contact-item">
+        <div class="ci-icon">📞</div>
         <div>
           <div class="ci-label">تلفن و پیامک</div>
           <div class="ci-val" dir="ltr">09029499239</div>
         </div>
       </div>
-      <div class="contact-info-row">
-        <div class="ci-icon"><i class="ti ti-brand-telegram"></i></div>
+      <div class="contact-item">
+        <div class="ci-icon">💬</div>
         <div>
           <div class="ci-label">پیام‌رسان‌ها</div>
           <div class="ci-val">ایتا — بله — تلگرام</div>
         </div>
       </div>
-      <div class="contact-info-row">
-        <div class="ci-icon"><i class="ti ti-clock"></i></div>
+      <div class="contact-item">
+        <div class="ci-icon">🕐</div>
         <div>
           <div class="ci-label">ساعت پاسخگویی</div>
           <div class="ci-val">شنبه تا پنجشنبه — ۹ تا ۲۱</div>
         </div>
       </div>
+      <div class="contact-item">
+        <div class="ci-icon">💻</div>
+        <div>
+          <div class="ci-label">نوع مشاوره</div>
+          <div class="ci-val">حضوری و آنلاین در سراسر ایران</div>
+        </div>
+      </div>
     </div>
-    <div class="cf-area">
+    <div class="cf">
       <label class="cf-label">نام و نام‌خانوادگی</label>
-      <input class="cf-input" type="text" placeholder="مثلاً: علی رضایی">
+      <input class="cf-input" type="text" placeholder="مثلاً: علی رضایی" id="cf-name">
       <label class="cf-label">شماره تماس</label>
-      <input class="cf-input" type="text" placeholder="09xxxxxxxxx" dir="ltr">
+      <input class="cf-input" type="text" placeholder="09xxxxxxxxx" dir="ltr" id="cf-phone">
       <label class="cf-label">موضوع مشاوره</label>
-      <input class="cf-input" type="text" placeholder="به‌طور خلاصه بنویسید...">
+      <input class="cf-input" type="text" placeholder="به‌طور خلاصه بنویسید..." id="cf-topic">
       <button class="cf-btn">ارسال درخواست</button>
     </div>
   </div>
 </div>
+</section>
 
+<!-- FOOTER -->
 <footer class="footer">
-  <span class="footer-brand"><b>روان</b>آرا — دکتر حسین بیدمشکی</span>
+  <span class="footer-logo"><span>روان</span>آرا — دکتر حسین بیدمشکی</span>
   <span class="footer-copy">تمام حقوق محفوظ است © ۱۴۰۴</span>
 </footer>
 
 <script>
+// NAV scroll effect
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// SLIDER
 let cur=0;
 const slides=document.querySelectorAll('.slide');
-const dots=document.querySelectorAll('.dot');
-const nums=['01','02','03'];
+const dots=document.querySelectorAll('.hero-dot');
+const cntrs=['01 — 03','02 — 03','03 — 03'];
 function goSlide(n){
   slides[cur].classList.remove('active');
   dots[cur].classList.remove('active');
   cur=n;
   slides[cur].classList.add('active');
   dots[cur].classList.add('active');
-  document.getElementById('slide-num').textContent=nums[cur]+' / 03';
+  document.getElementById('hc').textContent=cntrs[cur];
 }
-setInterval(()=>goSlide((cur+1)%3),4500);
+setInterval(()=>goSlide((cur+1)%3),5000);
+
+// AI INTAKE
+function submitAI(){
+  const name=document.getElementById('ai-name').value.trim();
+  const age=document.getElementById('ai-age').value;
+  const gender=document.getElementById('ai-gender').value;
+  const marital=document.getElementById('ai-marital').value;
+  const topic=document.getElementById('ai-topic').value;
+  const desc=document.getElementById('ai-desc').value.trim();
+  if(!name||!topic){alert('لطفاً نام و موضوع مراجعه را وارد کنید.');return;}
+  const result=document.getElementById('ai-result');
+  result.style.display='block';
+  result.innerHTML='<span style="color:var(--sky)">✓ اطلاعات شما دریافت شد</span><br><br>'+
+    'دکتر بیدمشکی با توجه به اطلاعات ارسالی شما، آماده‌ی یک جلسه‌ی هدفمند و شخصی‌سازی‌شده خواهد بود.<br><br>'+
+    '<strong style="color:var(--sky)">خلاصه پرونده اولیه:</strong><br>'+
+    '● نام: '+name+'<br>'+
+    (age?'● سن: '+age+' سال<br>':'')+
+    (topic?'● موضوع مراجعه: '+topic+'<br>':'')+
+    (desc?'● توضیحات: '+desc+'<br>':'')+
+    '<br>📞 به زودی با شماره ۰۹۰۲۹۴۹۹۲۳۹ با شما تماس گرفته می‌شود.';
+}
 </script>
 </body>
 </html>
-HTMLEOF
-echo "done"
-Output
-
-done
