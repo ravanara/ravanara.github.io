@@ -5,6 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>روان‌آرا | دکتر حسین بیدمشکی</title>
 <meta name="description" content="روان‌آرا — فضایی امن برای رشد و شنیدن. دکتر حسین بیدمشکی، دکترای تخصصی روانشناسی. مشاوره فردی، خانواده، آزمون‌های روانشناختی. ۰۹۰۲۹۴۹۹۲۳۹">
+<link rel="canonical" href="https://ravanara.github.io/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><circle cx='20' cy='20' r='18.5' stroke='%237EC8E3' stroke-width='1.2'/><circle cx='20' cy='20' r='13' stroke='rgba(126,200,227,0.3)' stroke-width='0.8' stroke-dasharray='3 3'/><path d='M11 26 C11 15 15 11 20 11 C25 11 29 15 29 20 C29 25 25 27.5 20 27.5' stroke='%237EC8E3' stroke-width='2' stroke-linecap='round' fill='none'/><circle cx='20' cy='28' r='2.5' fill='%231B4F8A'/></svg>">
+
+<!-- ====== Open Graph Tags ====== -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ravanara.github.io/">
+<meta property="og:title" content="روان‌آرا | دکتر حسین بیدمشکی">
+<meta property="og:description" content="فضایی امن برای رشد و شنیدن — مشاوره روانشناسی کودک، خانواده و فردی">
+<meta property="og:image" content="https://deydigital.ir/wp-content/uploads/2021/01/BA-2573.jpg">
+<meta property="og:locale" content="fa_IR">
+
+<!-- ====== Structured Data (Schema.org) ====== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Psychologist",
+  "name": "دکتر حسین بیدمشکی",
+  "telephone": "09029499239",
+  "description": "مشاوره روانشناسی کودک، نوجوان، خانواده و سلامت روان",
+  "priceRange": "$$",
+  "image": "https://deydigital.ir/wp-content/uploads/2021/01/BA-2573.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IR"
+  }
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -35,6 +63,7 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
 .nav.scrolled .nav-menu a{color:var(--navy)}
 .nav-menu a:hover{color:var(--sky)!important}
 .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+.menu-close{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;position:absolute;left:1.5rem;top:1rem}
 
 /* HERO */
 .hero{position:relative;height:75vh;min-height:500px;overflow:hidden;background:var(--navy)}
@@ -68,7 +97,11 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
 .sec-h b{font-weight:800}
 .sec-rule{width:32px;height:2px;background:var(--blue);margin:.8rem 0 2rem}
 
-/* BLOG (بالای صفحه) */
+/* SCROLL ANIMATION */
+.scroll-fade{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.scroll-fade.show{opacity:1;transform:translateY(0)}
+
+/* BLOG (مقالات) */
 .blog-bg{background:#fff;padding:4rem 1.5rem}
 .blog-inner{max-width:1080px;margin:0 auto}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem;margin-top:2rem}
@@ -171,23 +204,44 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
 .cf{background:var(--off);border:1px solid var(--border);padding:1.5rem;border-radius:8px}
 .cf-input{width:100%;border:1px solid var(--border);padding:10px 12px;font-size:12px;margin-bottom:.8rem;background:#fff;font-family:inherit;outline:none;border-radius:4px}
 .cf-input:focus{border-color:var(--blue)}
-.cf-btn{width:100%;background:var(--navy);color:#fff;padding:12px;font-size:12px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;font-family:inherit;border-radius:4px}
+.cf-btn{width:100%;background:var(--navy);color:#fff;padding:12px;font-size:12px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;font-family:inherit;border-radius:4px;transition:background .2s}
 .cf-btn:hover{background:var(--blue)}
+.cf-btn:disabled{opacity:.6;cursor:not-allowed}
+.cf-msg{margin-top:10px;padding:10px;border-radius:4px;font-size:11px;display:none;text-align:center}
+.cf-msg.success{display:block;background:#eafaf1;color:#27ae60;border:1px solid #a9dfbf}
+.cf-msg.error{display:block;background:#fde8e8;color:#e74c3c;border:1px solid #f5bebe}
 
 /* FOOTER */
 .footer{background:var(--navy);padding:1.5rem;text-align:center;color:rgba(255,255,255,.5);font-size:11px}
 .footer b{color:var(--sky)}
 
+/* BACK TO TOP */
+.back-top{position:fixed;bottom:100px;left:24px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#0B1F3A,#1B4F8A);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(11,31,58,.3);z-index:9998;display:none;align-items:center;justify-content:center;font-size:20px;transition:all .3s}
+.back-top:hover{transform:scale(1.1);background:var(--blue)}
+.back-top.show{display:flex}
+
+/* FLOATING SOCIAL BUTTONS */
+.floating-social{position:fixed;bottom:100px;left:80px;display:flex;flex-direction:column;gap:8px;z-index:9997}
+.floating-social a{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:all .3s}
+.floating-social a:hover{transform:scale(1.15)}
+.floating-social .tg{background:#0088cc}
+.floating-social .ble{background:#6c5ce7}
+.floating-social .ita{background:#00b894}
+@media(max-width:480px){.floating-social{left:74px;bottom:90px}.floating-social a{width:38px;height:38px;font-size:15px}}
+
 /* RESPONSIVE */
 @media(max-width:768px){
-  .nav-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(11,31,58,0.98);flex-direction:column;padding:1rem;gap:.5rem}
+  .nav-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(11,31,58,0.98);flex-direction:column;padding:3rem 2rem;gap:.8rem;justify-content:center;align-items:center;z-index:300}
   .nav-menu.open{display:flex}
+  .nav-menu a{font-size:18px;color:#fff!important}
   .menu-toggle{display:block}
+  .menu-close.open{display:block;position:fixed;top:1rem;left:1.5rem;z-index:301;color:#fff;font-size:28px;background:none;border:none;cursor:pointer}
   .about-grid{grid-template-columns:1fr}
   .about-badge{left:0}
   .contact-grid{grid-template-columns:1fr}
   .gallery-slide{min-width:240px;height:280px}
   .slide-body{padding:0 1rem;padding-top:60px}
+  .back-top{bottom:80px;left:16px;width:38px;height:38px;font-size:16px}
 }
 </style>
 </head>
@@ -199,7 +253,8 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
     <svg class="logo-svg" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18.5" stroke="#7EC8E3" stroke-width="1.2"/><circle cx="20" cy="20" r="13" stroke="rgba(126,200,227,0.3)" stroke-width="0.8" stroke-dasharray="3 3"/><path d="M11 26 C11 15 15 11 20 11 C25 11 29 15 29 20 C29 25 25 27.5 20 27.5" stroke="#7EC8E3" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="20" cy="28" r="2.5" fill="#1B4F8A"/></svg>
     <span class="logo-text"><span>روان</span>آرا</span>
   </a>
-  <button class="menu-toggle" onclick="document.getElementById('nav-menu').classList.toggle('open')">☰</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
+  <button class="menu-close" id="menuClose" aria-label="بستن منو">✕</button>
   <ul class="nav-menu" id="nav-menu">
     <li><a href="#blog">مقالات</a></li>
     <li><a href="#expertise">تخصص‌ها</a></li>
@@ -252,9 +307,9 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
     </div>
   </div>
   <div class="hero-dots">
-    <button class="hero-dot active" onclick="goSlide(0)"></button>
-    <button class="hero-dot" onclick="goSlide(1)"></button>
-    <button class="hero-dot" onclick="goSlide(2)"></button>
+    <button class="hero-dot active" onclick="goSlide(0)" aria-label="اسلاید ۱"></button>
+    <button class="hero-dot" onclick="goSlide(1)" aria-label="اسلاید ۲"></button>
+    <button class="hero-dot" onclick="goSlide(2)" aria-label="اسلاید ۳"></button>
   </div>
 </section>
 
@@ -264,14 +319,28 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <span class="ticker-item">مشاوره فردی ● روانشناسی کودک ● لجبازی ● بحران نوجوانی ● آزمون MMPI ● پرخاشگری ● هویت‌یابی ● سلامت روان ●</span>
 </div></div>
 
-<!-- BLOG (مقالات در بالای صفحه) -->
+<!-- BLOG (مقالات) -->
 <div class="blog-bg" id="blog">
 <div class="blog-inner">
   <span class="sec-eye">مقالات روزانه</span>
   <h2 class="sec-h">آخرین <b>مطالب روانشناسی</b></h2>
   <div class="sec-rule"></div>
-  <div class="blog-grid" id="posts">
-    <!-- FOOTER -->
+  <div class="blog-grid scroll-fade" id="posts">
+    <div class="blog-card">
+      <h3>🧠 چگونه با لجبازی کودک خود برخورد کنیم؟</h3>
+      <p>لجبازی در کودکان معمولاً نشانه‌ای از نیاز به استقلال و ابراز وجود است. بهترین راهکارها شامل: تعیین مرزهای مشخص، پرهیز از برخورد مستقیم، استفاده از انتخاب‌های محدود، و تقویت رفتارهای مثبت است.</p>
+      <small>📅 ۱۴۰۴/۰۴/۲۰</small>
+    </div>
+    <div class="blog-card">
+      <h3>💑 مهارت‌های ارتباط مؤثر در خانواده</h3>
+      <p>ارتباط مؤثر پایه‌ی روابط سالم است. گوش دادن فعال، ابراز احساسات بدون سرزنش، و احترام به مرزهای فردی از اصول کلیدی هستند که می‌توانند کیفیت روابط خانوادگی را به‌طور چشمگیری بهبود بخشند.</p>
+      <small>📅 ۱۴۰۴/۰۴/۱۸</small>
+    </div>
+    <div class="blog-card">
+      <h3>🧘 مدیریت استرس و اضطراب در زندگی روزمره</h3>
+      <p>استرس بخشی از زندگی مدرن است، اما می‌توان با تکنیک‌هایی مثل تنفس عمیق، مدیتیشن، ورزش منظم، و تنظیم زمان خواب آن را مدیریت کرد. در صورت تداوم، مشاوره تخصصی توصیه می‌شود.</p>
+      <small>📅 ۱۴۰۴/۰۴/۱۵</small>
+    </div>
   </div>
 </div>
 </div>
@@ -283,27 +352,27 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h">تمرکز من روی <b>۵ حوزه</b> اصلی</h2>
   <div class="sec-rule"></div>
   <div class="exp-grid">
-    <div class="exp-card">
+    <div class="exp-card scroll-fade">
       <div class="exp-icon">🧒</div>
       <div class="exp-name">روانشناسی کودک و نوجوان</div>
       <div class="exp-desc">بحران بلوغ، لجبازی، پرخاشگری، اختلالات یادگیری و آمادگی مدرسه</div>
     </div>
-    <div class="exp-card">
+    <div class="exp-card scroll-fade">
       <div class="exp-icon">💑</div>
       <div class="exp-name">روانشناسی خانواده</div>
       <div class="exp-desc">زوج‌درمانی، طلاق عاطفی، بهبود روابط زناشویی و فرزندپروری</div>
     </div>
-    <div class="exp-card">
+    <div class="exp-card scroll-fade">
       <div class="exp-icon">🌱</div>
       <div class="exp-name">رشد فردی</div>
       <div class="exp-desc">عزت نفس، خودشناسی، مدیریت استرس و توسعه مهارت‌های زندگی</div>
     </div>
-    <div class="exp-card">
+    <div class="exp-card scroll-fade">
       <div class="exp-icon">📊</div>
       <div class="exp-name">آزمون‌های روان‌شناسی</div>
       <div class="exp-desc">MMPI، میلون، کتل، هالند، نئو و تست‌های هوش و استعداد</div>
     </div>
-    <div class="exp-card">
+    <div class="exp-card scroll-fade">
       <div class="exp-icon">🧠</div>
       <div class="exp-name">اختلالات روانی</div>
       <div class="exp-desc">تشخیص و درمان افسردگی، اضطراب، وسواس، پانیک و PTSD</div>
@@ -319,17 +388,17 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h">چه کمکی می‌توانم <b>بکنم</b></h2>
   <div class="sec-rule"></div>
   <div class="svc-grid">
-    <div class="svc-card">
+    <div class="svc-card scroll-fade">
       <div class="svc-icon">💻</div>
       <div class="svc-title">مشاوره فردی و آنلاین</div>
       <div class="svc-desc">اضطراب، وسواس، افسردگی و بهبود رشد فردی — حضوری یا از راه دور در سراسر ایران</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card scroll-fade">
       <div class="svc-icon">👨‍👩‍👧‍👦</div>
       <div class="svc-title">راهنمایی فرزندپروری</div>
       <div class="svc-desc">مدیریت لجبازی، پرخاشگری و مشکلات رفتاری کودک — با رویکرد علمی و عملی برای والدین</div>
     </div>
-    <div class="svc-card">
+    <div class="svc-card scroll-fade">
       <div class="svc-icon">📋</div>
       <div class="svc-title">آزمون‌های روانشناختی</div>
       <div class="svc-desc">MMPI، میلون، کتل و استعدادیابی — برای خودشناسی عمیق‌تر و تشخیص دقیق‌تر</div>
@@ -346,12 +415,12 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h" style="color:#fff">آزمون‌های تخصصی <b style="color:var(--sky)">رایگان</b></h2>
   <div class="sec-rule" style="background:var(--sky)"></div>
   <div class="tests-grid">
-    <a class="test-card" href="https://forms.gle/ruBGXshy9yrxdZDo8" target="_blank"><div class="test-icon">🧒</div><div class="test-name">سلامت روان کودکان ۷ تا ۱۱ سال</div><span class="test-arrow">←</span></a>
-    <a class="test-card" href="https://forms.gle/ENnsYGKJx3nRXivTA" target="_blank"><div class="test-icon">🧠</div><div class="test-name">آزمون شخصیت MMPI</div><span class="test-arrow">←</span></a>
-    <a class="test-card" href="https://forms.gle/wzgiaz52MG5mAg4E6" target="_blank"><div class="test-icon">🎯</div><div class="test-name">آزمون هالند (انتخاب شغل)</div><span class="test-arrow">←</span></a>
-    <a class="test-card" href="https://forms.gle/CwniFkNnwy6k9aLj9" target="_blank"><div class="test-icon">📊</div><div class="test-name">آزمون شخصیت کتل (16PF)</div><span class="test-arrow">←</span></a>
-    <a class="test-card" href="https://forms.gle/e5HEnnGnpVUxCGgA9" target="_blank"><div class="test-icon">🔬</div><div class="test-name">پرسشنامه بالینی میلون ۳</div><span class="test-arrow">←</span></a>
-    <a class="test-card" href="https://forms.gle/c7MDbZReECZQAHic6" target="_blank"><div class="test-icon">💆</div><div class="test-name">مقیاس استرس ادراک‌شده</div><span class="test-arrow">←</span></a>
+    <a class="test-card scroll-fade" href="https://forms.gle/ruBGXshy9yrxdZDo8" target="_blank"><div class="test-icon">🧒</div><div class="test-name">سلامت روان کودکان ۷ تا ۱۱ سال</div><span class="test-arrow">←</span></a>
+    <a class="test-card scroll-fade" href="https://forms.gle/ENnsYGKJx3nRXivTA" target="_blank"><div class="test-icon">🧠</div><div class="test-name">آزمون شخصیت MMPI</div><span class="test-arrow">←</span></a>
+    <a class="test-card scroll-fade" href="https://forms.gle/wzgiaz52MG5mAg4E6" target="_blank"><div class="test-icon">🎯</div><div class="test-name">آزمون هالند (انتخاب شغل)</div><span class="test-arrow">←</span></a>
+    <a class="test-card scroll-fade" href="https://forms.gle/CwniFkNnwy6k9aLj9" target="_blank"><div class="test-icon">📊</div><div class="test-name">آزمون شخصیت کتل (16PF)</div><span class="test-arrow">←</span></a>
+    <a class="test-card scroll-fade" href="https://forms.gle/e5HEnnGnpVUxCGgA9" target="_blank"><div class="test-icon">🔬</div><div class="test-name">پرسشنامه بالینی میلون ۳</div><span class="test-arrow">←</span></a>
+    <a class="test-card scroll-fade" href="https://forms.gle/c7MDbZReECZQAHic6" target="_blank"><div class="test-icon">💆</div><div class="test-name">مقیاس استرس ادراک‌شده</div><span class="test-arrow">←</span></a>
   </div>
 </div>
 </div>
@@ -364,18 +433,18 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h">لحظاتی از <b>دنیای روان‌آرا</b></h2>
   <div class="sec-rule"></div>
   <div class="gallery-track" id="galleryTrack">
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/06/BA-9208.jpg" alt="روانشناسی خانواده"><div class="gallery-caption">روانشناسی خانواده</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8623_2-800x560.jpg" alt="مشاوره کودک"><div class="gallery-caption">مشاوره کودک</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8620_2-800x560.jpg" alt="فرزندپروری"><div class="gallery-caption">فرزندپروری</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2021/07/ba-6013-scaled-800x556.jpg" alt="سلامت روان"><div class="gallery-caption">سلامت روان</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8533_1-800x560.jpg" alt="نوجوان"><div class="gallery-caption">نوجوان و خانواده</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8530_1-800x560.jpg" alt="مشاوره"><div class="gallery-caption">مشاوره تخصصی</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8528_1-800x560.jpg" alt="بهداشت"><div class="gallery-caption">بهداشت روان</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8526_1-800x560.jpg" alt="آموزش"><div class="gallery-caption">آموزش والدین</div></div>
-    <div class="gallery-slide"><img src="https://deydigital.ir/wp-content/uploads/2023/06/BA-9111_1-800x560.jpg" alt="روان‌آرا"><div class="gallery-caption">روان‌آرا</div></div>
-    <div class="gallery-slide"><img src="https://cdn.tarhpik.com/5_Preview/1403/5/4/104602/Conceptual-photo-of-mental-health-with-brain-explosion-400.webp" alt="ذهن"><div class="gallery-caption">سلامت ذهن</div></div>
-    <div class="gallery-slide"><img src="https://cdn.tarhpik.com/5_Preview/1404/6/30/052239/brain-drawing-sketch-black-lines-hand-drawn-illustration-human-psychology-doctor-psych-student-mental-health-concept-dark-academia-anatomy-400.webp" alt="روانشناسی"><div class="gallery-caption">علم روانشناسی</div></div>
-    <div class="gallery-slide"><img src="https://artwave.ir/wp-content/uploads/2026/02/Untitled-1-94.jpg" alt="آرامش"><div class="gallery-caption">آرامش</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/06/BA-9208.jpg" alt="روانشناسی خانواده"><div class="gallery-caption">روانشناسی خانواده</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8623_2-800x560.jpg" alt="مشاوره کودک"><div class="gallery-caption">مشاوره کودک</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8620_2-800x560.jpg" alt="فرزندپروری"><div class="gallery-caption">فرزندپروری</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2021/07/ba-6013-scaled-800x556.jpg" alt="سلامت روان"><div class="gallery-caption">سلامت روان</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8533_1-800x560.jpg" alt="نوجوان"><div class="gallery-caption">نوجوان و خانواده</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8530_1-800x560.jpg" alt="مشاوره"><div class="gallery-caption">مشاوره تخصصی</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8528_1-800x560.jpg" alt="بهداشت"><div class="gallery-caption">بهداشت روان</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/05/BA-8526_1-800x560.jpg" alt="آموزش"><div class="gallery-caption">آموزش والدین</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://deydigital.ir/wp-content/uploads/2023/06/BA-9111_1-800x560.jpg" alt="روان‌آرا"><div class="gallery-caption">روان‌آرا</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://cdn.tarhpik.com/5_Preview/1403/5/4/104602/Conceptual-photo-of-mental-health-with-brain-explosion-400.webp" alt="ذهن"><div class="gallery-caption">سلامت ذهن</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://cdn.tarhpik.com/5_Preview/1404/6/30/052239/brain-drawing-sketch-black-lines-hand-drawn-illustration-human-psychology-doctor-psych-student-mental-health-concept-dark-academia-anatomy-400.webp" alt="روانشناسی"><div class="gallery-caption">علم روانشناسی</div></div>
+    <div class="gallery-slide"><img loading="lazy" src="https://artwave.ir/wp-content/uploads/2026/02/Untitled-1-94.jpg" alt="آرامش"><div class="gallery-caption">آرامش</div></div>
   </div>
   <div class="gallery-nav">
     <button class="gallery-btn" onclick="document.getElementById('galleryTrack').scrollBy({left:-300,behavior:'smooth'})">‹</button>
@@ -391,37 +460,37 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h">تحلیل روانشناختی <b>فیلم‌های برتر</b></h2>
   <div class="sec-rule"></div>
   <div class="movie-grid">
-    <div class="movie-card">
+    <div class="movie-card scroll-fade">
       <div class="movie-title">🎬 درخشش ابدی یک ذهن پاک</div>
       <div class="movie-year">Eternal Sunshine of the Spotless Mind (2004)</div>
       <div class="movie-desc">تحلیل: این فیلم به زیبایی مفهوم <strong>حافظهٔ هیجانی</strong> و <strong>تروماهای رابطه</strong> را به تصویر می‌کشد. تلاش برای پاک کردن خاطرات دردناک، در نهایت به از دست دادن بخشی از هویت منجر می‌شود. روان‌درمانی به ما می‌آموزد که به‌جای فرار از درد، باید آن را پردازش کرد.</div>
       <div class="movie-tag">#حافظه #تروما #رابطه #هویت</div>
     </div>
-    <div class="movie-card">
+    <div class="movie-card scroll-fade">
       <div class="movie-title">🎭 باشگاه مشت‌زنی</div>
       <div class="movie-year">Fight Club (1999)</div>
       <div class="movie-desc">تحلیل: تصویری قدرتمند از <strong>اختلال تجزیهٔ هویت</strong> و <strong>بحران مردانگی</strong> در دنیای مدرن. شخصیت اصلی با سرکوب احساسات و مصرف‌گرایی، هویت واقعی خود را گم کرده و تایلر دردن به‌عنوان شخصیت جایگزین ظهور می‌کند.</div>
       <div class="movie-tag">#هویت #مصرف‌گرایی #مردانگی #DID</div>
     </div>
-    <div class="movie-card">
+    <div class="movie-card scroll-fade">
       <div class="movie-title">🎨 ذهن زیبا</div>
       <div class="movie-year">A Beautiful Mind (2001)</div>
       <div class="movie-desc">تحلیل: روایت زندگی جان نش، ریاضی‌دان نابغه مبتلا به <strong>اسکیزوفرنی</strong>. فیلم نشان می‌دهد که چگونه <strong>عشق و حمایت خانواده</strong> می‌تواند در مدیریت بیماری‌های روانی نقش حیاتی ایفا کند و فرد می‌تواند با وجود توهمات، زندگی پرباری داشته باشد.</div>
       <div class="movie-tag">#اسکیزوفرنی #عشق #نبوغ #خانواده</div>
     </div>
-    <div class="movie-card">
+    <div class="movie-card scroll-fade">
       <div class="movie-title">⚫ قوی سیاه</div>
       <div class="movie-year">Black Swan (2010)</div>
       <div class="movie-desc">تحلیل: بررسی عمیق <strong>کمال‌گرایی</strong>، <strong>وسواس</strong> و <strong>روان‌پریشی</strong> در دنیای رقابتی باله. نینا نشان می‌دهد که چگونه فشار برای «کامل بودن» می‌تواند مرز بین واقعیت و خیال را از بین ببرد و به فروپاشی روانی منجر شود.</div>
       <div class="movie-tag">#کمال‌گرایی #وسواس #روان‌پریشی #هویت</div>
     </div>
-    <div class="movie-card">
+    <div class="movie-card scroll-fade">
       <div class="movie-title">👧 ناطور دشت</div>
       <div class="movie-year">The Catcher in the Rye (اقتباس)</div>
       <div class="movie-desc">تحلیل: داستان نوجوانی در آستانهٔ <strong>بحران هویت</strong> که با <strong>افسردگی نوجوانی</strong> و احساس بیگانگی از جامعه دست‌وپنجه نرم می‌کند. تحلیل شخصیت هولدن کالفیلد، درک عمیقی از چالش‌های دوران بلوغ و نیاز به دیده شدن ارائه می‌دهد.</div>
       <div class="movie-tag">#نوجوانی #افسردگی #هویت #بلوغ</div>
     </div>
-    <div class="movie-card">
+    <div class="movie-card scroll-fade">
       <div class="movie-title">⚡ بهتره با سال تماس بگیری</div>
       <div class="movie-year">Better Call Saul (2015-2022)</div>
       <div class="movie-desc">تحلیل: سریالی دربارهٔ <strong>تغییر تدریجی شخصیت</strong> و <strong>توجیه اخلاقی</strong>. جیمی مک‌گیل نشان می‌دهد که چگونه <strong>زخم‌های دوران کودکی</strong> و نیاز به تأیید، می‌تواند مسیر اخلاقی یک انسان را به‌کلی تغییر دهد.</div>
@@ -438,25 +507,25 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h">کتاب‌های <b>روانشناسی</b></h2>
   <div class="sec-rule"></div>
   <div class="books-grid">
-    <div class="book-card">
+    <div class="book-card scroll-fade">
       <div class="book-cover">📖</div>
       <div class="book-title">کتاب‌های تألیفی دکتر بیدمشکی</div>
       <div class="book-author">به زودی در این بخش</div>
       <div class="book-desc">در این بخش کتاب‌های تألیفی دکتر حسین بیدمشکی به همراه خلاصه و لینک دانلود قرار خواهد گرفت.</div>
     </div>
-    <div class="book-card">
+    <div class="book-card scroll-fade">
       <div class="book-cover">📘</div>
       <div class="book-title">انسان در جستجوی معنا</div>
       <div class="book-author">ویکتور فرانکل</div>
-      <div class="book-desc">روایت یک روانپزشک از اردوگاه‌های کار اجباری و کشف معنای زندگی در darkest لحظات. بنیان‌گذار معنادرمانی.</div>
+      <div class="book-desc">روایت یک روانپزشک از اردوگاه‌های کار اجباری و کشف معنای زندگی در تاریک‌ترین لحظات. بنیان‌گذار معنادرمانی.</div>
     </div>
-    <div class="book-card">
+    <div class="book-card scroll-fade">
       <div class="book-cover">📕</div>
       <div class="book-title">تفکر، سریع و کند</div>
       <div class="book-author">دانیل کاهنمن</div>
       <div class="book-desc">بررسی دو سیستم تفکر در ذهن انسان توسط برندهٔ نوبل اقتصاد. درک عمیق از سوگیری‌های شناختی و تصمیم‌گیری.</div>
     </div>
-    <div class="book-card">
+    <div class="book-card scroll-fade">
       <div class="book-cover">📙</div>
       <div class="book-title">تئوری انتخاب</div>
       <div class="book-author">ویلیام گلسر</div>
@@ -473,19 +542,19 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h">محتوای رایگان — <b>هر روز</b></h2>
   <div class="sec-rule"></div>
   <div class="ch-grid">
-    <div class="ch-card">
+    <div class="ch-card scroll-fade">
       <div class="ch-icon">📱</div>
       <div class="ch-name">تلگرام</div>
       <div class="ch-desc">ویدیو، پادکست و محتوای تخصصی روانشناسی روزانه</div>
       <a class="ch-btn" href="https://t.me/ravanarahbm" target="_blank">عضویت</a>
     </div>
-    <div class="ch-card">
+    <div class="ch-card scroll-fade">
       <div class="ch-icon">💬</div>
       <div class="ch-name">بله</div>
       <div class="ch-desc">مقالات و محتوای آموزشی رایگان</div>
       <a class="ch-btn" href="https://ble.ir/ravanara1" target="_blank">عضویت</a>
     </div>
-    <div class="ch-card">
+    <div class="ch-card scroll-fade">
       <div class="ch-icon">🌐</div>
       <div class="ch-name">ایتا</div>
       <div class="ch-desc">محتوای تخصصی روانشناسی خانواده</div>
@@ -495,22 +564,22 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
 </div>
 </div>
 
-<!-- ABOUT (انتهای صفحه) -->
+<!-- ABOUT -->
 <section id="about">
 <div class="sec">
   <span class="sec-eye">درباره من</span>
   <h2 class="sec-h">آشنایی با <b>دکتر بیدمشکی</b></h2>
   <div class="sec-rule"></div>
   <div class="about-grid">
-    <div class="about-photo-frame">
-      <img class="about-photo" src="photo.jpg" alt="دکتر حسین بیدمشکی" onerror="this.src='https://deydigital.ir/wp-content/uploads/2021/01/BA-2573.jpg'">
+    <div class="about-photo-frame scroll-fade">
+      <img class="about-photo" src="https://deydigital.ir/wp-content/uploads/2021/01/BA-2573.jpg" alt="دکتر حسین بیدمشکی">
       <div class="about-accent"></div>
       <div class="about-badge">
         <span class="about-n">+۱۵</span>
         <span class="about-t">سال تجربه</span>
       </div>
     </div>
-    <div>
+    <div class="scroll-fade">
       <p class="about-body">به <strong>مرکز مشاوره روان‌آرا</strong> خوش آمدید.<br><br>
       من دکتر حسین بیدمشکی، دارندهٔ دکترای تخصصی روانشناسی هستم. فراتر از یک عنوان، رسالتم ایجاد <strong>«فضایی امن برای رشد و شنیدن»</strong> است — همان شعاری که سال‌هاست به آن ایمان دارم.<br><br>
       در طول سال‌های فعالیت بالینی، با صدها خانواده در مسیر فرزندپروری بهتر، مدیریت رفتار کودک، بحران‌های نوجوانی و بهبود روابط زناشویی همراه بوده‌ام.</p>
@@ -533,17 +602,17 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
   <h2 class="sec-h">رزرو <b>نوبت مشاوره</b></h2>
   <div class="sec-rule"></div>
   <div class="contact-grid">
-    <div>
+    <div class="scroll-fade">
       <div class="ci-row"><div class="ci-icon">📞</div><div><div class="ci-label">تلفن</div><div class="ci-val">09029499239</div></div></div>
       <div class="ci-row"><div class="ci-icon">💬</div><div><div class="ci-label">پیام‌رسان</div><div class="ci-val">تلگرام — بله — ایتا</div></div></div>
       <div class="ci-row"><div class="ci-icon">🕐</div><div><div class="ci-label">ساعت</div><div class="ci-val">شنبه تا پنجشنبه ۹ تا ۲۱</div></div></div>
     </div>
-    <div class="cf">
-      <input class="cf-input" type="text" id="cfName" placeholder="نام و نام‌خانوادگی">
-      <input class="cf-input" type="text" id="cfPhone" placeholder="شماره تماس">
-      <input class="cf-input" type="text" id="cfSubject" placeholder="موضوع مشاوره">
+    <div class="cf scroll-fade">
+      <input class="cf-input" type="text" id="cfName" name="name" placeholder="نام و نام‌خانوادگی" required>
+      <input class="cf-input" type="tel" id="cfPhone" name="phone" placeholder="شماره تماس (۰۹xxxxxxxxx)" pattern="09[0-9]{9}" required>
+      <input class="cf-input" type="text" id="cfSubject" name="subject" placeholder="موضوع مشاوره">
       <button class="cf-btn" id="cfBtn">ارسال درخواست</button>
-      <div id="cfMessage" style="display:none;margin-top:10px;font-size:12px;text-align:center;padding:8px;border-radius:4px;"></div>
+      <div class="cf-msg" id="cfMessage"></div>
     </div>
   </div>
 </div>
@@ -551,73 +620,128 @@ body{font-family:'Vazirmatn',Tahoma,sans-serif;direction:rtl;background:#fff;col
 
 <!-- FOOTER -->
 <footer class="footer">
-  <b>روان</b>آرا — دکتر حسین بیدمشکی | تمام حقوق محفوظ است © ۱۴۰۴
+  <b>روان</b>آرا — دکتر حسین بیدمشکی | تمام حقوق محفوظ است © ۱۴۰۵
 </footer>
 
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- FLOATING SOCIAL BUTTONS -->
+<div class="floating-social">
+  <a class="tg" href="https://t.me/ravanarahbm" target="_blank" aria-label="تلگرام">📱</a>
+  <a class="ble" href="https://ble.ir/ravanara1" target="_blank" aria-label="بله">💬</a>
+  <a class="ita" href="https://eitaa.com/joinchat/1402078727C85e29da10" target="_blank" aria-label="ایتا">🌐</a>
+</div>
+
 <script>
-// NAV
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60));
+// ====== NAV SCROLL ======
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('nav');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
 
-// SLIDER
-var cur=0,slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.hero-dot'),timer;
-function goSlide(n){slides[cur].classList.remove('active');dots[cur].classList.remove('active');cur=n;slides[cur].classList.add('active');dots[cur].classList.add('active');clearInterval(timer);timer=setInterval(()=>goSlide((cur+1)%3),5000)}
-timer=setInterval(()=>goSlide((cur+1)%3),5000);
+  // Back to top button
+  const backTop = document.getElementById('backTop');
+  backTop.classList.toggle('show', window.scrollY > 400);
+});
 
-// MENU CLOSE
-document.querySelectorAll('#nav-menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav-menu').classList.remove('open')));
+// ====== SLIDER ======
+var cur = 0,
+  slides = document.querySelectorAll('.slide'),
+  dots = document.querySelectorAll('.hero-dot'),
+  timer;
 
-// ====== فرم تماس عملیاتی شده ======
+function goSlide(n) {
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur = n;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('active');
+  clearInterval(timer);
+  timer = setInterval(function() { goSlide((cur + 1) % 3); }, 5000);
+}
+timer = setInterval(function() { goSlide((cur + 1) % 3); }, 5000);
+
+// ====== MENU TOGGLE (با دکمه بسته شدن) ======
+var menuToggle = document.getElementById('menuToggle');
+var menuClose = document.getElementById('menuClose');
+var navMenu = document.getElementById('nav-menu');
+
+function toggleMenu(open) {
+  navMenu.classList.toggle('open', open);
+  menuClose.classList.toggle('open', open);
+  menuToggle.style.display = open ? 'none' : 'block';
+}
+
+menuToggle.addEventListener('click', function() { toggleMenu(true); });
+menuClose.addEventListener('click', function() { toggleMenu(false); });
+
+// بستن منو با کلیک روی لینک‌ها
+document.querySelectorAll('#nav-menu a').forEach(function(a) {
+  a.addEventListener('click', function() { toggleMenu(false); });
+});
+
+// ====== SCROLL ANIMATION (Intersection Observer) ======
+var fadeEls = document.querySelectorAll('.scroll-fade');
+if ('IntersectionObserver' in window) {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(function(el) { observer.observe(el); });
+} else {
+  fadeEls.forEach(function(el) { el.classList.add('show'); });
+}
+
+// ====== CONTACT FORM ======
 document.getElementById('cfBtn').addEventListener('click', function(e) {
   e.preventDefault();
-  const name = document.getElementById('cfName').value.trim();
-  const phone = document.getElementById('cfPhone').value.trim();
-  const subject = document.getElementById('cfSubject').value.trim() || 'درخواست مشاوره';
-  const msgDiv = document.getElementById('cfMessage');
+  var name = document.getElementById('cfName').value.trim();
+  var phone = document.getElementById('cfPhone').value.trim();
+  var subject = document.getElementById('cfSubject').value.trim() || 'درخواست مشاوره';
+  var msgDiv = document.getElementById('cfMessage');
 
+  // اعتبارسنجی
   if (!name || name.length < 3) {
-    msgDiv.style.display = 'block';
-    msgDiv.style.color = '#e74c3c';
-    msgDiv.style.background = '#fde8e8';
+    msgDiv.className = 'cf-msg error';
     msgDiv.textContent = '⚠️ لطفاً نام و نام‌خانوادگی خود را وارد کنید.';
     return;
   }
   if (!/^09[0-9]{9}$/.test(phone)) {
-    msgDiv.style.display = 'block';
-    msgDiv.style.color = '#e74c3c';
-    msgDiv.style.background = '#fde8e8';
+    msgDiv.className = 'cf-msg error';
     msgDiv.textContent = '⚠️ شماره تماس باید ۱۱ رقم و با ۰۹ شروع شود.';
     return;
   }
 
-  const btn = document.getElementById('cfBtn');
+  var btn = document.getElementById('cfBtn');
   btn.disabled = true;
   btn.textContent = 'در حال ارسال...';
+  msgDiv.className = 'cf-msg';
   msgDiv.style.display = 'none';
 
   fetch('https://psychology-counselor.bidmeshkihossein.workers.dev/api/contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, phone, subject })
+    body: JSON.stringify({ name: name, phone: phone, subject: subject })
   })
-  .then(r => r.json())
-  .then(d => {
-    msgDiv.style.display = 'block';
-    msgDiv.style.color = '#27ae60';
-    msgDiv.style.background = '#eafaf1';
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    msgDiv.className = 'cf-msg success';
     msgDiv.textContent = '✅ ' + (d.message || 'درخواست شما با موفقیت ثبت شد. به زودی تماس می‌گیریم.');
     document.getElementById('cfName').value = '';
     document.getElementById('cfPhone').value = '';
     document.getElementById('cfSubject').value = '';
   })
-  .catch(() => {
-    msgDiv.style.display = 'block';
-    msgDiv.style.color = '#e74c3c';
-    msgDiv.style.background = '#fde8e8';
+  .catch(function() {
+    msgDiv.className = 'cf-msg error';
     msgDiv.textContent = '❌ خطا در ارسال. لطفاً دوباره تلاش کنید.';
   })
-  .finally(() => {
+  .finally(function() {
     btn.disabled = false;
     btn.textContent = 'ارسال درخواست';
+    msgDiv.style.display = 'block';
   });
 });
 </script>
@@ -627,7 +751,7 @@ document.getElementById('cfBtn').addEventListener('click', function(e) {
 .chat-fab{position:fixed;bottom:24px;left:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#0B1F3A,#1B4F8A);color:#7EC8E3;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(11,31,58,.35);z-index:9999;display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:26px}
 .chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 30px rgba(11,31,58,.45)}
 .chat-fab.active{opacity:0;pointer-events:none;transform:scale(.5)}
-.chat-win{position:fixed;bottom:24px;left:24px;width:370px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 48px);background:#fff;border-radius:16px;box-shadow:0 12px 48px rgba(11,31,58,.25);z-index:9999;display:none;flex-direction:column;overflow:hidden;font-family:'Vazirmatn',Tahoma,sans-serif;animation:chatIn .35s ease}
+.chat-win{position:fixed;bottom:24px;left:80px;width:370px;max-width:calc(100vw - 100px);height:560px;max-height:calc(100vh - 48px);background:#fff;border-radius:16px;box-shadow:0 12px 48px rgba(11,31,58,.25);z-index:9999;display:none;flex-direction:column;overflow:hidden;font-family:'Vazirmatn',Tahoma,sans-serif;animation:chatIn .35s ease}
 @keyframes chatIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 .chat-win.open{display:flex}
 .chat-header{background:linear-gradient(135deg,#0B1F3A,#1B4F8A);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:10px;flex-shrink:0}
@@ -667,7 +791,7 @@ document.getElementById('cfBtn').addEventListener('click', function(e) {
 .chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
 .chat-quick button{font-size:10px;padding:6px 12px;border:1px solid #DDE6F0;background:#F4F7FB;color:#1B4F8A;border-radius:16px;cursor:pointer;font-family:inherit;transition:all .2s}
 .chat-quick button:hover{background:#1B4F8A;color:#fff}
-@media(max-width:480px){.chat-win{left:0;bottom:0;width:100%;height:100%;border-radius:0}.chat-fab{bottom:20px;left:20px}}
+@media(max-width:480px){.chat-win{left:0;bottom:0;width:100%;height:100%;border-radius:0}.chat-fab{bottom:20px;left:16px}}
 </style>
 
 <button class="chat-fab" id="chatFab" onclick="toggleChat()">💬</button>
@@ -711,67 +835,84 @@ const WORKER_URL = 'https://psychology-counselor.bidmeshkihossein.workers.dev';
 let session = null;
 
 function toggleChat(){
-  const fab=document.getElementById('chatFab');
-  const win=document.getElementById('chatWin');
+  var fab=document.getElementById('chatFab');
+  var win=document.getElementById('chatWin');
   fab.classList.toggle('active');
   win.classList.toggle('open');
 }
 
 function registerUser(){
-  const name=document.getElementById('regName').value.trim();
-  const phone=document.getElementById('regPhone').value.trim();
+  var name=document.getElementById('regName').value.trim();
+  var phone=document.getElementById('regPhone').value.trim();
   if(!name||name.length<3){alert('لطفاً نام خود را وارد کنید');return}
   if(!/^09[0-9]{9}$/.test(phone)){alert('شماره تماس معتبر نیست. مثال: 09123456789');return}
 
-  const btn=document.getElementById('regBtn');
+  var btn=document.getElementById('regBtn');
   btn.disabled=true;btn.textContent='در حال اتصال...';
 
-  fetch(WORKER_URL+'/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,phone})})
-  .then(r=>r.json()).then(d=>{
+  fetch(WORKER_URL+'/api/register',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:name,phone:phone})
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
     if(d.sessionId){
       session=d.sessionId;
       document.getElementById('chatReg').style.display='none';
       document.getElementById('chatBody').style.display='flex';
       document.getElementById('chatQuick').style.display='flex';
       document.getElementById('chatInputBar').style.display='flex';
-      addMsg('bot',`سلام ${name} عزیز 👋\n\nمن دستیار هوش مصنوعی دکتر بیدمشکی هستم. در زمینه روانشناسی کودک، نوجوان، خانواده و سلامت روان می‌توانم به شما کمک کنم.\n\nسؤال خود را بپرسید یا یکی از موضوعات زیر را انتخاب کنید.`);
+      addMsg('bot','سلام '+name+' عزیز 👋\n\nمن دستیار هوش مصنوعی دکتر بیدمشکی هستم. در زمینه روانشناسی کودک، نوجوان، خانواده و سلامت روان می‌توانم به شما کمک کنم.\n\nسؤال خود را بپرسید یا یکی از موضوعات زیر را انتخاب کنید.');
     }else{alert('خطا در اتصال. دوباره تلاش کنید.');}
-  }).catch(()=>{alert('خطا در اتصال به سرور. دوباره تلاش کنید.');}).finally(()=>{btn.disabled=false;btn.textContent='شروع گفتگو';});
+  })
+  .catch(function(){alert('خطا در اتصال به سرور. دوباره تلاش کنید.');})
+  .finally(function(){btn.disabled=false;btn.textContent='شروع گفتگو';});
 }
 
 function sendQuick(text){document.getElementById('chatInput').value=text;sendMsg();}
+
 function sendMsg(){
-  const input=document.getElementById('chatInput');
-  const text=input.value.trim();
+  var input=document.getElementById('chatInput');
+  var text=input.value.trim();
   if(!text||!session)return;
   input.value='';
   addMsg('user',text);
   showTyping();
-  const btn=document.getElementById('sendBtn');btn.disabled=true;
+  var btn=document.getElementById('sendBtn');btn.disabled=true;
 
-  fetch(WORKER_URL+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:session,message:text})})
-  .then(r=>r.json()).then(d=>{
+  fetch(WORKER_URL+'/api/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({sessionId:session,message:text})
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
     hideTyping();
     addMsg('bot',d.response||'متأسفم، پاسخی دریافت نشد. دوباره تلاش کنید.');
-  }).catch(()=>{hideTyping();addMsg('bot','خطا در اتصال. لطفاً دوباره تلاش کنید.');}).finally(()=>{btn.disabled=false;});
+  })
+  .catch(function(){hideTyping();addMsg('bot','خطا در اتصال. لطفاً دوباره تلاش کنید.');})
+  .finally(function(){btn.disabled=false;});
 }
 
 function addMsg(who,text){
-  const body=document.getElementById('chatBody');
-  const div=document.createElement('div');
+  var body=document.getElementById('chatBody');
+  var div=document.createElement('div');
   div.className='chat-msg '+who;
   div.textContent=text;
   body.appendChild(div);
   body.scrollTop=body.scrollHeight;
 }
+
 function showTyping(){
-  const body=document.getElementById('chatBody');
-  const div=document.createElement('div');
+  var body=document.getElementById('chatBody');
+  var div=document.createElement('div');
   div.className='chat-typing';div.id='typingIndicator';
   div.innerHTML='<span></span><span></span><span></span>';
   body.appendChild(div);body.scrollTop=body.scrollHeight;
 }
-function hideTyping(){const t=document.getElementById('typingIndicator');if(t)t.remove();}
+
+function hideTyping(){var t=document.getElementById('typingIndicator');if(t)t.remove();}
 </script>
 <!-- ====== پایان چت‌بات ====== -->
 
