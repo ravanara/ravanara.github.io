@@ -744,9 +744,108 @@ document.getElementById('cfBtn').addEventListener('click', function(e) {
     msgDiv.style.display = 'block';
   });
 });
+
+// ====== چت‌بات روان‌آرا ======
+const WORKER_URL = 'https://psychology-counselor.bidmeshkihossein.workers.dev';
+let session = null;
+
+function toggleChat() {
+  var fab = document.getElementById('chatFab');
+  var win = document.getElementById('chatWin');
+  fab.classList.toggle('active');
+  win.classList.toggle('open');
+}
+
+function registerUser() {
+  var name = document.getElementById('regName').value.trim();
+  var phone = document.getElementById('regPhone').value.trim();
+  if (!name || name.length < 3) { alert('لطفاً نام خود را وارد کنید'); return; }
+  if (!/^09[0-9]{9}$/.test(phone)) { alert('شماره تماس معتبر نیست. مثال: 09123456789'); return; }
+
+  var btn = document.getElementById('regBtn');
+  btn.disabled = true;
+  btn.textContent = 'در حال اتصال...';
+
+  fetch(WORKER_URL + '/api/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, phone: phone })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.sessionId) {
+      session = d.sessionId;
+      document.getElementById('chatReg').style.display = 'none';
+      document.getElementById('chatBody').style.display = 'flex';
+      document.getElementById('chatQuick').style.display = 'flex';
+      document.getElementById('chatInputBar').style.display = 'flex';
+      addMsg('bot', 'سلام ' + name + ' عزیز 👋\n\nمن دستیار هوش مصنوعی دکتر بیدمشکی هستم. در زمینه روانشناسی کودک، نوجوان، خانواده و سلامت روان می‌توانم به شما کمک کنم.\n\nسؤال خود را بپرسید یا یکی از موضوعات زیر را انتخاب کنید.');
+    } else {
+      alert('خطا در اتصال. دوباره تلاش کنید.');
+    }
+  })
+  .catch(function() { alert('خطا در اتصال به سرور. دوباره تلاش کنید.'); })
+  .finally(function() { btn.disabled = false; btn.textContent = 'شروع گفتگو'; });
+}
+
+function sendQuick(text) {
+  document.getElementById('chatInput').value = text;
+  sendMsg();
+}
+
+function sendMsg() {
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if (!text || !session) return;
+  input.value = '';
+  addMsg('user', text);
+  showTyping();
+  var btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+
+  fetch(WORKER_URL + '/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sessionId: session, message: text })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    hideTyping();
+    addMsg('bot', d.response || 'متأسفم، پاسخی دریافت نشد. دوباره تلاش کنید.');
+  })
+  .catch(function() {
+    hideTyping();
+    addMsg('bot', 'خطا در اتصال. لطفاً دوباره تلاش کنید.');
+  })
+  .finally(function() { btn.disabled = false; });
+}
+
+function addMsg(who, text) {
+  var body = document.getElementById('chatBody');
+  var div = document.createElement('div');
+  div.className = 'chat-msg ' + who;
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function showTyping() {
+  var body = document.getElementById('chatBody');
+  var div = document.createElement('div');
+  div.className = 'chat-typing';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function hideTyping() {
+  var t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
 </script>
 
-<!-- ====== چت‌بات روان‌آرا ====== -->
+<!-- ====== چت‌بات UI ====== -->
 <style>
 .chat-fab{position:fixed;bottom:24px;left:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#0B1F3A,#1B4F8A);color:#7EC8E3;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(11,31,58,.35);z-index:9999;display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:26px}
 .chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 30px rgba(11,31,58,.45)}
@@ -766,7 +865,7 @@ document.getElementById('cfBtn').addEventListener('click', function(e) {
 .chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#FAFBFD}
 .chat-body::-webkit-scrollbar{width:4px}
 .chat-body::-webkit-scrollbar-thumb{background:#DDE6F0;border-radius:2px}
-.chat-msg{max-width:82%;padding:10px 14px;border-radius:12px;font-size:12.5px;line-height:2;word-break:break-word}
+.chat-msg{max-width:82%;padding:10px 14px;border-radius:12px;font-size:12.5px;line-height:2;word-break:break-word;white-space:pre-wrap}
 .chat-msg.bot{background:#fff;border:1px solid #DDE6F0;color:#1a2a3a;border-bottom-right-radius:4px;align-self:flex-start}
 .chat-msg.user{background:linear-gradient(135deg,#1B4F8A,#4A7FB5);color:#fff;border-bottom-left-radius:4px;align-self:flex-end}
 .chat-typing{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
@@ -829,92 +928,6 @@ document.getElementById('cfBtn').addEventListener('click', function(e) {
     <button onclick="sendMsg()" id="sendBtn">➤</button>
   </div>
 </div>
-
-<script>
-const WORKER_URL = 'https://psychology-counselor.bidmeshkihossein.workers.dev';
-let session = null;
-
-function toggleChat(){
-  var fab=document.getElementById('chatFab');
-  var win=document.getElementById('chatWin');
-  fab.classList.toggle('active');
-  win.classList.toggle('open');
-}
-
-function registerUser(){
-  var name=document.getElementById('regName').value.trim();
-  var phone=document.getElementById('regPhone').value.trim();
-  if(!name||name.length<3){alert('لطفاً نام خود را وارد کنید');return}
-  if(!/^09[0-9]{9}$/.test(phone)){alert('شماره تماس معتبر نیست. مثال: 09123456789');return}
-
-  var btn=document.getElementById('regBtn');
-  btn.disabled=true;btn.textContent='در حال اتصال...';
-
-  fetch(WORKER_URL+'/api/register',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,phone:phone})
-  })
-  .then(function(r){return r.json();})
-  .then(function(d){
-    if(d.sessionId){
-      session=d.sessionId;
-      document.getElementById('chatReg').style.display='none';
-      document.getElementById('chatBody').style.display='flex';
-      document.getElementById('chatQuick').style.display='flex';
-      document.getElementById('chatInputBar').style.display='flex';
-      addMsg('bot','سلام '+name+' عزیز 👋\n\nمن دستیار هوش مصنوعی دکتر بیدمشکی هستم. در زمینه روانشناسی کودک، نوجوان، خانواده و سلامت روان می‌توانم به شما کمک کنم.\n\nسؤال خود را بپرسید یا یکی از موضوعات زیر را انتخاب کنید.');
-    }else{alert('خطا در اتصال. دوباره تلاش کنید.');}
-  })
-  .catch(function(){alert('خطا در اتصال به سرور. دوباره تلاش کنید.');})
-  .finally(function(){btn.disabled=false;btn.textContent='شروع گفتگو';});
-}
-
-function sendQuick(text){document.getElementById('chatInput').value=text;sendMsg();}
-
-function sendMsg(){
-  var input=document.getElementById('chatInput');
-  var text=input.value.trim();
-  if(!text||!session)return;
-  input.value='';
-  addMsg('user',text);
-  showTyping();
-  var btn=document.getElementById('sendBtn');btn.disabled=true;
-
-  fetch(WORKER_URL+'/api/chat',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({sessionId:session,message:text})
-  })
-  .then(function(r){return r.json();})
-  .then(function(d){
-    hideTyping();
-    addMsg('bot',d.response||'متأسفم، پاسخی دریافت نشد. دوباره تلاش کنید.');
-  })
-  .catch(function(){hideTyping();addMsg('bot','خطا در اتصال. لطفاً دوباره تلاش کنید.');})
-  .finally(function(){btn.disabled=false;});
-}
-
-function addMsg(who,text){
-  var body=document.getElementById('chatBody');
-  var div=document.createElement('div');
-  div.className='chat-msg '+who;
-  div.textContent=text;
-  body.appendChild(div);
-  body.scrollTop=body.scrollHeight;
-}
-
-function showTyping(){
-  var body=document.getElementById('chatBody');
-  var div=document.createElement('div');
-  div.className='chat-typing';div.id='typingIndicator';
-  div.innerHTML='<span></span><span></span><span></span>';
-  body.appendChild(div);body.scrollTop=body.scrollHeight;
-}
-
-function hideTyping(){var t=document.getElementById('typingIndicator');if(t)t.remove();}
-</script>
-<!-- ====== پایان چت‌بات ====== -->
 
 </body>
 </html>
