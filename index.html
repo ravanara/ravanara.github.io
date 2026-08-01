@@ -422,86 +422,6 @@
             letter-spacing: 2px;
         }
 
-        /* ===== BLOG ===== */
-        .blog-bg {
-            background: #fff;
-            padding: 5rem 0;
-        }
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        .blog-card {
-            background: var(--off);
-            border: 1px solid var(--border);
-            padding: 1.8rem;
-            border-radius: 14px;
-            transition: all .3s;
-        }
-        .blog-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-4px);
-        }
-        .blog-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: .6rem;
-            line-height: 1.6;
-        }
-        .blog-card p {
-            font-size: 15px;
-            color: var(--text);
-            line-height: 2.2;
-        }
-        .blog-card small {
-            display: block;
-            margin-top: .8rem;
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        /* ===== EXPERTISE ===== */
-        .exp-bg {
-            background: var(--off);
-            padding: 5rem 0;
-        }
-        .exp-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
-            margin-top: 2rem;
-        }
-        .exp-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            padding: 1.8rem 1.2rem;
-            text-align: center;
-            border-radius: 14px;
-            transition: all .35s;
-        }
-        .exp-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-        }
-        .exp-icon {
-            font-size: 44px;
-            margin-bottom: .6rem;
-        }
-        .exp-name {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--navy);
-        }
-        .exp-desc {
-            font-size: 13px;
-            color: var(--muted);
-            margin-top: .4rem;
-            line-height: 1.8;
-        }
-
         /* ===== SERVICES ===== */
         .svc-grid {
             display: grid;
@@ -655,7 +575,7 @@
             background: var(--blue);
         }
 
-        /* ===== TOPICS SLIDER (جدید) ===== */
+        /* ===== TOPICS SLIDER ===== */
         .topics-slider-section {
             padding: 5rem 0;
             background: var(--off);
@@ -769,62 +689,106 @@
             border-radius: 6px;
         }
 
-        /* ===== MOVIE PSYCH ===== */
-        .movie-bg {
-            background: var(--off);
+        /* ===== MOVIE SLIDER ===== */
+        .movie-slider-section {
             padding: 5rem 0;
+            background: var(--off);
         }
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        .movie-slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 0.5rem 0;
         }
-        .movie-card {
+        .movie-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+        .movie-card-slide {
+            min-width: 340px;
+            max-width: 340px;
             background: #fff;
-            border: 1px solid var(--border);
-            padding: 1.8rem;
-            border-radius: 14px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, .6);
             transition: all .3s;
+            flex-shrink: 0;
         }
-        .movie-card:hover {
+        .movie-card-slide:hover {
+            transform: translateY(-6px);
             box-shadow: var(--shadow-hover);
         }
-        .movie-title {
+        .movie-card-slide .movie-poster {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: var(--border);
+        }
+        .movie-card-slide .movie-body {
+            padding: 1.5rem 1.5rem 1.8rem;
+        }
+        .movie-card-slide .movie-title {
             font-size: 18px;
             font-weight: 700;
             color: var(--navy);
+            margin-bottom: 0.2rem;
         }
-        .movie-year {
+        .movie-card-slide .movie-year {
             font-size: 13px;
             color: var(--sky);
             background: rgba(126, 200, 227, .1);
-            padding: 2px 10px;
+            padding: 2px 12px;
             border-radius: 4px;
             display: inline-block;
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
         }
-        .movie-desc {
+        .movie-card-slide .movie-rating {
+            font-size: 13px;
+            color: #f1c40f;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .movie-card-slide .movie-psych-analysis {
             font-size: 14px;
             color: var(--text);
             line-height: 2.2;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-left: 4px;
         }
-        .movie-desc strong {
+        .movie-card-slide .movie-psych-analysis::-webkit-scrollbar {
+            width: 4px;
+        }
+        .movie-card-slide .movie-psych-analysis::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        .movie-card-slide .movie-psych-analysis strong {
             color: var(--navy);
         }
-        .movie-tag {
-            font-size: 12px;
-            color: var(--blue);
-            font-weight: 600;
-            margin-top: .5rem;
+        .movie-card-slide .movie-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 0.8rem;
         }
-        .movie-links {
+        .movie-card-slide .movie-tags span {
+            font-size: 11px;
+            color: var(--blue);
+            background: var(--off);
+            padding: 3px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        .movie-card-slide .movie-links {
             display: flex;
             gap: .8rem;
-            margin-top: .8rem;
+            margin-top: 1rem;
             flex-wrap: wrap;
         }
-        .movie-links a {
+        .movie-card-slide .movie-links a {
             font-size: 12px;
             padding: 5px 16px;
             background: var(--navy);
@@ -832,7 +796,7 @@
             border-radius: 6px;
             transition: background .2s;
         }
-        .movie-links a:hover {
+        .movie-card-slide .movie-links a:hover {
             background: var(--blue);
         }
 
@@ -1243,6 +1207,10 @@
             .about-badge {
                 left: 0;
             }
+            .movie-card-slide {
+                min-width: 290px;
+                max-width: 290px;
+            }
         }
         @media(max-width:768px) {
             .nav-menu {
@@ -1324,6 +1292,13 @@
                 height: 40px;
                 font-size: 16px;
             }
+            .movie-card-slide {
+                min-width: 260px;
+                max-width: 260px;
+            }
+            .movie-card-slide .movie-poster {
+                height: 170px;
+            }
         }
         @media(max-width:500px) {
             .logo-text {
@@ -1339,11 +1314,22 @@
             .nav-menu a {
                 font-size: 18px;
             }
-            .blog-grid {
-                grid-template-columns: 1fr;
+            .movie-card-slide {
+                min-width: 220px;
+                max-width: 220px;
             }
-            .movie-grid {
-                grid-template-columns: 1fr;
+            .movie-card-slide .movie-poster {
+                height: 140px;
+            }
+            .movie-card-slide .movie-body {
+                padding: 1rem;
+            }
+            .movie-card-slide .movie-title {
+                font-size: 15px;
+            }
+            .movie-card-slide .movie-psych-analysis {
+                font-size: 12px;
+                max-height: 120px;
             }
         }
     </style>
@@ -1358,12 +1344,10 @@
         </a>
         <button class="menu-toggle" id="menuToggle" aria-label="منو">☰</button>
         <ul class="nav-menu" id="navMenu">
-            <li><a href="#blog">مقالات</a></li>
-            <li><a href="#expertise">تخصص‌ها</a></li>
             <li><a href="#services">خدمات</a></li>
             <li><a href="#tests">آزمون‌ها</a></li>
             <li><a href="#gallery">گالری</a></li>
-            <li><a href="#movie-psych">سینما</a></li>
+            <li><a href="#movie-slider">سینما</a></li>
             <li><a href="#books">کتاب</a></li>
             <li><a href="#about">درباره من</a></li>
             <li><a href="#contact">تماس</a></li>
@@ -1392,7 +1376,7 @@
                     <span class="slide-tag">تخصص ویژه</span>
                     <h1 class="slide-h">مدیریت <b>لجبازی و پرخاشگری</b><br>در کودکان و نوجوانان</h1>
                     <p class="slide-p">راهکارهای علمی و عملی برای والدین<br>با رویکرد ترکیبی روانشناسی بالینی و تربیتی</p>
-                    <a class="slide-btn" href="#expertise">بیشتر بدانید ←</a>
+                    <a class="slide-btn" href="#services">بیشتر بدانید ←</a>
                 </div>
             </div>
         </div>
@@ -1449,70 +1433,6 @@
         <div class="ticker-inner">
             <span class="ticker-item">مشاوره فردی ● روانشناسی کودک ● لجبازی ● بحران نوجوانی ● آزمون MMPI ● پرخاشگری ● هویت‌یابی ● سلامت روان ●</span>
             <span class="ticker-item">مشاوره فردی ● روانشناسی کودک ● لجبازی ● بحران نوجوانی ● آزمون MMPI ● پرخاشگری ● هویت‌یابی ● سلامت روان ●</span>
-        </div>
-    </div>
-
-    <!-- ===== BLOG ===== -->
-    <div class="blog-bg" id="blog">
-        <div class="container">
-            <div class="section-title">
-                <h2>آخرین <b>مطالب روانشناسی</b></h2>
-                <div class="line"></div>
-            </div>
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <h3>🧠 چگونه با لجبازی کودک خود برخورد کنیم؟</h3>
-                    <p>لجبازی در کودکان معمولاً نشانه‌ای از نیاز به استقلال و ابراز وجود است. بهترین راهکارها شامل: تعیین مرزهای مشخص، پرهیز از برخورد مستقیم، استفاده از انتخاب‌های محدود، و تقویت رفتارهای مثبت است.</p>
-                    <small>📅 ۱۴۰۴/۰۴/۲۰</small>
-                </div>
-                <div class="blog-card">
-                    <h3>💑 مهارت‌های ارتباط مؤثر در خانواده</h3>
-                    <p>ارتباط مؤثر پایه‌ی روابط سالم است. گوش دادن فعال، ابراز احساسات بدون سرزنش، و احترام به مرزهای فردی از اصول کلیدی هستند که می‌توانند کیفیت روابط خانوادگی را بهبود بخشند.</p>
-                    <small>📅 ۱۴۰۴/۰۴/۱۸</small>
-                </div>
-                <div class="blog-card">
-                    <h3>🧘 مدیریت استرس و اضطراب در زندگی روزمره</h3>
-                    <p>استرس بخشی از زندگی مدرن است، اما می‌توان با تکنیک‌هایی مثل تنفس عمیق، مدیتیشن، ورزش منظم، و تنظیم زمان خواب آن را مدیریت کرد. در صورت تداوم، مشاوره تخصصی توصیه می‌شود.</p>
-                    <small>📅 ۱۴۰۴/۰۴/۱۵</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== EXPERTISE ===== -->
-    <div class="exp-bg" id="expertise">
-        <div class="container">
-            <div class="section-title">
-                <h2>حوزه‌های <b>تخصصی</b></h2>
-                <div class="line"></div>
-            </div>
-            <div class="exp-grid">
-                <div class="exp-card">
-                    <div class="exp-icon">🧒</div>
-                    <div class="exp-name">روانشناسی کودک و نوجوان</div>
-                    <div class="exp-desc">بحران بلوغ، لجبازی، پرخاشگری، اختلالات یادگیری و آمادگی مدرسه</div>
-                </div>
-                <div class="exp-card">
-                    <div class="exp-icon">💑</div>
-                    <div class="exp-name">روانشناسی خانواده</div>
-                    <div class="exp-desc">زوج‌درمانی، طلاق عاطفی، بهبود روابط زناشویی و فرزندپروری</div>
-                </div>
-                <div class="exp-card">
-                    <div class="exp-icon">🌱</div>
-                    <div class="exp-name">رشد فردی</div>
-                    <div class="exp-desc">عزت نفس، خودشناسی، مدیریت استرس و توسعه مهارت‌های زندگی</div>
-                </div>
-                <div class="exp-card">
-                    <div class="exp-icon">📊</div>
-                    <div class="exp-name">آزمون‌های روان‌شناسی</div>
-                    <div class="exp-desc">MMPI، میلون، کتل، هالند، نئو و تست‌های هوش و استعداد</div>
-                </div>
-                <div class="exp-card">
-                    <div class="exp-icon">🧠</div>
-                    <div class="exp-name">اختلالات روانی</div>
-                    <div class="exp-desc">تشخیص و درمان افسردگی، اضطراب، وسواس، پانیک و PTSD</div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1587,74 +1507,211 @@
         </div>
     </div>
 
-    <!-- ===== TOPICS SLIDER (اسلایدر مطالب جدید) ===== -->
-    <section class="topics-slider-section" id="topics-slider">
-        <div class="container">
-            <div class="section-title">
-                <h2>همه <b>مطالب روانشناسی</b></h2>
-                <div class="line"></div>
-                <p>برای مطالعه، روی هر مطلب کلیک کنید — اسلایدر خودکار</p>
-            </div>
-            <div class="topics-slider-wrapper">
-                <div class="topics-track" id="topicsTrack">
-                    <div class="topic-card"><div class="icon">🧒</div><h4>مدیریت خشم کودکان</h4><p>راهکارهای عملی برای کنترل خشم و پرخاشگری</p><a class="topic-link" href="khashm-koodak.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">💪</div><h4>عزت نفس نوجوانان</h4><p>روش‌های افزایش اعتماد به نفس در دوران نوجوانی</p><a class="topic-link" href="ezzat-nafs-nojavan.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">😨</div><h4>ترس در کودکان</h4><p>شناخت و مدیریت ترس‌های طبیعی کودکان</p><a class="topic-link" href="tars-koodak.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">💑</div><h4>روابط زناشویی</h4><p>اصول طلایی برای یک رابطه‌ی عاطفی سالم</p><a class="topic-link" href="ravabet-zanashooi.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">💍</div><h4>ازدواج</h4><p>راهنمای انتخاب همسر و زندگی مشترک موفق</p><a class="topic-link" href="ezdevaj.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">⚖️</div><h4>طلاق</h4><p>مدیریت بحران طلاق و تصمیم‌گیری آگاهانه</p><a class="topic-link" href="talaagh.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">👨‍👧</div><h4>طلاق و فرزندان</h4><p>تاثیرات طلاق بر کودکان و راه‌های کاهش آسیب</p><a class="topic-link" href="talaagh-farzand.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">💔</div><h4>خیانت</h4><p>مدیریت خیانت و بازسازی اعتماد در رابطه</p><a class="topic-link" href="khiyanat.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">💬</div><h4>ارتباط مؤثر در خانواده</h4><p>مهارت‌های ارتباطی برای خانواده‌ای شاد</p><a class="topic-link" href="ertebat-khanevade.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">😔</div><h4>افسردگی</h4><p>شناخت، درمان و بهبودی از افسردگی</p><a class="topic-link" href="depression.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">😰</div><h4>اضطراب</h4><p>مدیریت اضطراب و بازگشت به آرامش</p><a class="topic-link" href="ezterab.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">😰</div><h4>حملات پنیک</h4><p>راهکارهای مدیریت حملات پنیک</p><a class="topic-link" href="panic.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">🕵️</div><h4>پارانویا</h4><p>بدگمانی شدید و راه‌های درمان آن</p><a class="topic-link" href="paranoia.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">🌿</div><h4>سبک زندگی سالم</h4><p>نکات طلایی برای زندگی سالم و متعادل</p><a class="topic-link" href="sabk-zendegi.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">💆</div><h4>مدیریت استرس روزمره</h4><p>راهکارهای ساده برای کاهش استرس</p><a class="topic-link" href="stress-rouzmarre.html">مطالعه</a></div>
-                    <div class="topic-card"><div class="icon">🌟</div><h4>مهارت‌های زندگی</h4><p>۱۰ مهارت کلیدی برای موفقیت و آرامش</p><a class="topic-link" href="maharathaaye-zendegi.html">مطالعه</a></div>
-                </div>
-            </div>
-            <div class="slider-nav">
-                <button id="prevBtn">‹</button>
-                <button id="nextBtn">›</button>
-            </div>
-            <div class="slider-dots" id="sliderDots"></div>
-        </div>
-    </section>
-
-    <!-- ===== MOVIE PSYCH ===== -->
-    <div class="movie-bg" id="movie-psych">
+    <!-- ===== MOVIE SLIDER (تحلیل فیلم‌های برتر به صورت اسلایدر) ===== -->
+    <section class="movie-slider-section" id="movie-slider">
         <div class="container">
             <div class="section-title">
                 <h2>تحلیل روانشناختی <b>فیلم‌های برتر</b></h2>
                 <div class="line"></div>
+                <p>🎬 هر فیلم یک روایت روانشناختی عمیق — اسلایدر را حرکت دهید و تحلیل‌ها را بخوانید</p>
             </div>
-            <div class="movie-grid">
-                <div class="movie-card">
-                    <div class="movie-title">🎬 درخشش ابدی یک ذهن پاک</div>
-                    <div class="movie-year">Eternal Sunshine of the Spotless Mind (2004)</div>
-                    <div class="movie-desc"><strong>تحلیل:</strong> این فیلم به زیبایی مفهوم <strong>حافظهٔ هیجانی</strong> و <strong>تروماهای رابطه</strong> را به تصویر می‌کشد. تلاش برای پاک کردن خاطرات دردناک، در نهایت به از دست دادن بخشی از هویت منجر می‌شود. روان‌درمانی به ما می‌آموزد که به‌جای فرار از درد، باید آن را پردازش کرد.</div>
-                    <div class="movie-tag">#حافظه #تروما #رابطه #هویت</div>
-                    <div class="movie-links"><a href="https://www.imdb.com/title/tt0338013/" target="_blank">🔗 IMDB</a><a href="https://www.youtube.com/watch?v=07-QBnEkgXU" target="_blank">🎬 تریلر</a></div>
-                </div>
-                <div class="movie-card">
-                    <div class="movie-title">🎭 باشگاه مشت‌زنی</div>
-                    <div class="movie-year">Fight Club (1999)</div>
-                    <div class="movie-desc"><strong>تحلیل:</strong> تصویری قدرتمند از <strong>اختلال تجزیهٔ هویت (DID)</strong> و <strong>بحران مردانگی</strong> در دنیای مدرن. شخصیت اصلی با سرکوب احساسات و مصرف‌گرایی، هویت واقعی خود را گم کرده و تایلر دردن به‌عنوان شخصیت جایگزین ظهور می‌کند.</div>
-                    <div class="movie-tag">#هویت #مصرف‌گرایی #مردانگی #DID</div>
-                    <div class="movie-links"><a href="https://www.imdb.com/title/tt0137523/" target="_blank">🔗 IMDB</a><a href="https://www.youtube.com/watch?v=SUXWAEX2jlg" target="_blank">🎬 تریلر</a></div>
-                </div>
-                <div class="movie-card">
-                    <div class="movie-title">🎨 ذهن زیبا</div>
-                    <div class="movie-year">A Beautiful Mind (2001)</div>
-                    <div class="movie-desc"><strong>تحلیل:</strong> روایت زندگی جان نش، ریاضی‌دان نابغه مبتلا به <strong>اسکیزوفرنی</strong>. فیلم نشان می‌دهد که چگونه <strong>عشق و حمایت خانواده</strong> می‌تواند در مدیریت بیماری‌های روانی نقش حیاتی ایفا کند.</div>
-                    <div class="movie-tag">#اسکیزوفرنی #عشق #نبوغ #خانواده</div>
-                    <div class="movie-links"><a href="https://www.imdb.com/title/tt0268978/" target="_blank">🔗 IMDB</a><a href="https://www.youtube.com/watch?v=WFJgUm7iOKw" target="_blank">🎬 تریلر</a></div>
+
+            <div class="movie-slider-wrapper">
+                <div class="movie-track" id="movieTrack">
+                    <!-- فیلم ۱ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/6zSXyH6wjIEiM1i1Y6bZXu4bZ1d.jpg" alt="درخشش ابدی یک ذهن پاک" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">🎬 درخشش ابدی یک ذهن پاک</div>
+                            <div class="movie-year">Eternal Sunshine (2004)</div>
+                            <div class="movie-rating">⭐ ۸.۳/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                این فیلم به زیبایی مفهوم <strong>حافظهٔ هیجانی</strong> و <strong>تروماهای رابطه</strong> را به تصویر می‌کشد. تلاش برای پاک کردن خاطرات دردناک، در نهایت به از دست دادن بخشی از هویت منجر می‌شود. روان‌درمانی به ما می‌آموزد که به‌جای فرار از درد، باید آن را پردازش کرد. <strong>«آسیب‌پذیری و پذیرش خاطرات تلخ، بخشی از انسان بودن است.»</strong>
+                            </div>
+                            <div class="movie-tags">
+                                <span>#حافظه_هیجانی</span>
+                                <span>#تروما</span>
+                                <span>#هویت</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt0338013/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=07-QBnEkgXU" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فیلم ۲ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/8BdE8u6K8h4Fm6u8bK0hB5x8pVj.jpg" alt="باشگاه مشت‌زنی" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">🎭 باشگاه مشت‌زنی</div>
+                            <div class="movie-year">Fight Club (1999)</div>
+                            <div class="movie-rating">⭐ ۸.۸/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                تصویری قدرتمند از <strong>اختلال تجزیهٔ هویت (DID)</strong> و <strong>بحران مردانگی</strong> در دنیای مدرن. شخصیت اصلی با سرکوب احساسات و مصرف‌گرایی، هویت واقعی خود را گم کرده و تایلر دردن به‌عنوان شخصیت جایگزین ظهور می‌کند. <strong>«ما محصول انتخاب‌هایمان هستیم، نه محصول شرایط‌مان.»</strong>
+                            </div>
+                            <div class="movie-tags">
+                                <span>#اختلال_هویت</span>
+                                <span>#مردانگی</span>
+                                <span>#مصرف‌گرایی</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt0137523/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=SUXWAEX2jlg" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فیلم ۳ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/5UaKbTgT0p2X9n7cQ6yKUeC8d5f.jpg" alt="ذهن زیبا" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">🎨 ذهن زیبا</div>
+                            <div class="movie-year">A Beautiful Mind (2001)</div>
+                            <div class="movie-rating">⭐ ۸.۲/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                روایت زندگی جان نش، ریاضی‌دان نابغه مبتلا به <strong>اسکیزوفرنی</strong>. فیلم نشان می‌دهد که چگونه <strong>عشق و حمایت خانواده</strong> می‌تواند در مدیریت بیماری‌های روانی نقش حیاتی ایفا کند. «بیماری روانی پایان زندگی نیست، بلکه شروع یک مسیر جدید است.»
+                            </div>
+                            <div class="movie-tags">
+                                <span>#اسکیزوفرنی</span>
+                                <span>#حمایت_خانواده</span>
+                                <span>#نبوغ</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt0268978/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=WFJgUm7iOKw" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فیلم ۴ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/8dLjR7z1qXgJ8b9mhA8e0fXcZ1L.jpg" alt="قوی سیاه" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">⚫ قوی سیاه</div>
+                            <div class="movie-year">Black Swan (2010)</div>
+                            <div class="movie-rating">⭐ ۸.۰/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                بررسی عمیق <strong>کمال‌گرایی</strong>، <strong>وسواس</strong> و <strong>روان‌پریشی</strong> در دنیای رقابتی باله. نینا نشان می‌دهد که چگونه فشار برای «کامل بودن» می‌تواند مرز بین واقعیت و خیال را از بین ببرد. «کمال‌گرایی می‌تواند بزرگ‌ترین دشمن انسان باشد.»
+                            </div>
+                            <div class="movie-tags">
+                                <span>#کمال‌گرایی</span>
+                                <span>#وسواس</span>
+                                <span>#روان‌پریشی</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt0947798/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=5jaI1XOB-bs" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فیلم ۵ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/9zTk6iPZ5vLkz1eY1Tb2bQHlLvV.jpg" alt="جوکر" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">🃏 جوکر</div>
+                            <div class="movie-year">Joker (2019)</div>
+                            <div class="movie-rating">⭐ ۸.۴/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                نگاهی عمیق به <strong>اختلال شخصیت ضداجتماعی</strong> و <strong>شکست اجتماعی</strong>. فیلم نشان می‌دهد که چگونه طرد شدن، فقر و بی‌عدالتی می‌توانند یک انسان را به سمت خشونت و فروپاشی روانی سوق دهند. «خشونت زادهٔ ناامیدی است.»
+                            </div>
+                            <div class="movie-tags">
+                                <span>#اختلال_شخصیت</span>
+                                <span>#شکست_اجتماعی</span>
+                                <span>#خشونت</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt7286456/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=t433PEQGErc" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فیلم ۶ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/7bWxNpCzQbY5l8KxIYkM3bV4BzV.jpg" alt="شکست‌ناپذیر" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">🏆 شکست‌ناپذیر</div>
+                            <div class="movie-year">Unbroken (2014)</div>
+                            <div class="movie-rating">⭐ ۷.۲/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                داستان واقعی لوئی زامپرینی، اسیر جنگی که با <strong>تاب‌آوری</strong> و <strong>معنادرمانی</strong> از سخت‌ترین شرایط عبور کرد. فیلم نشان می‌دهد که قدرت ذهن می‌تواند بر هر شکنجه‌ای غلبه کند. «معنای زندگی در سخت‌ترین لحظات پیدا می‌شود.»
+                            </div>
+                            <div class="movie-tags">
+                                <span>#تاب_آوری</span>
+                                <span>#معنادرمانی</span>
+                                <span>#اسارت</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt1809398/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=WMkTBxC9Wg4" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فیلم ۷ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/3vIxX1jL8UQ5tLJwIYd0lXj8o7I.jpg" alt="هفت" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">🔍 هفت</div>
+                            <div class="movie-year">Se7en (1995)</div>
+                            <div class="movie-rating">⭐ ۸.۶/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                این فیلم به بررسی <strong>روان‌شناسی تاریک</strong> و <strong>اختلال شخصیت سادیستی</strong> می‌پردازد. جان دو نمایندهٔ سایه‌های انسانی است که در هر یک از ما وجود دارد. «هر انسانی سایه‌ای دارد که در تاریکی پنهان می‌کند.»
+                            </div>
+                            <div class="movie-tags">
+                                <span>#روان‌شناسی_تاریک</span>
+                                <span>#سادیسم</span>
+                                <span>#سایه</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt0114369/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=znmZoVkCjpI" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- فیلم ۸ -->
+                    <div class="movie-card-slide">
+                        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/5nZ3a6Rx8KQZt9jXj2vX9K9bQ8I.jpg" alt="زندگی پی" loading="lazy" onerror="this.src='https://via.placeholder.com/340x220/0B1F3A/7EC8E3?text=روان‌آرا'">
+                        <div class="movie-body">
+                            <div class="movie-title">⛵ زندگی پی</div>
+                            <div class="movie-year">Life of Pi (2012)</div>
+                            <div class="movie-rating">⭐ ۷.۹/۱۰</div>
+                            <div class="movie-psych-analysis">
+                                <strong>تحلیل روانشناختی:</strong><br>
+                                فیلمی دربارهٔ <strong>بقاء</strong>، <strong>ایمان</strong> و <strong>روایت‌سازی</strong> برای مقابله با تروما. پی با استفاده از داستان‌پردازی، توانست از تجربهٔ تلخ کشتی‌شکستگی جان سالم به در ببرد. «ذهن برای بقا، واقعیت را بازنویسی می‌کند.»
+                            </div>
+                            <div class="movie-tags">
+                                <span>#بقاء</span>
+                                <span>#ایمان</span>
+                                <span>#تروما</span>
+                            </div>
+                            <div class="movie-links">
+                                <a href="https://www.imdb.com/title/tt0454876/" target="_blank">🔗 IMDB</a>
+                                <a href="https://www.youtube.com/watch?v=3mMN693F3U4" target="_blank">🎬 تریلر</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- کنترل‌های اسلایدر فیلم -->
+            <div class="slider-nav">
+                <button id="moviePrevBtn">‹</button>
+                <button id="movieNextBtn">›</button>
+            </div>
+            <div class="slider-dots" id="movieSliderDots"></div>
         </div>
-    </div>
+    </section>
 
     <!-- ===== BOOKS ===== -->
     <div class="books-bg" id="books">
@@ -2310,16 +2367,16 @@
         });
 
         // ===== TOPICS SLIDER =====
-        const track = document.getElementById('topicsTrack');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const dotsContainer = document.getElementById('sliderDots');
+        const topicsTrack = document.getElementById('topicsTrack');
+        const topicsPrevBtn = document.getElementById('prevBtn');
+        const topicsNextBtn = document.getElementById('nextBtn');
+        const topicsDots = document.getElementById('sliderDots');
 
-        let cardWidth = 270 + 28;
-        let visibleCards = 3;
-        let currentIndex = 0;
+        let topicCardWidth = 270 + 28;
+        let topicsVisible = 3;
+        let topicsIndex = 0;
 
-        function getVisibleCards() {
+        function getTopicsVisible() {
             const w = window.innerWidth;
             if (w < 500) return 1;
             if (w < 768) return 2;
@@ -2327,64 +2384,148 @@
             return 3;
         }
 
-        function getTotalCards() {
-            return document.querySelectorAll('.topic-card').length;
+        function getTopicsTotal() {
+            return document.querySelectorAll('#topicsTrack .topic-card').length;
         }
 
-        function updateSlider() {
-            const total = getTotalCards();
-            visibleCards = getVisibleCards();
-            const maxIndex = Math.max(0, total - visibleCards);
-            if (currentIndex > maxIndex) currentIndex = maxIndex;
-            const offset = currentIndex * cardWidth;
-            track.style.transform = 'translateX(' + offset + 'px)';
+        function updateTopicsSlider() {
+            const total = getTopicsTotal();
+            topicsVisible = getTopicsVisible();
+            const maxIndex = Math.max(0, total - topicsVisible);
+            if (topicsIndex > maxIndex) topicsIndex = maxIndex;
+            const offset = topicsIndex * topicCardWidth;
+            if (topicsTrack) topicsTrack.style.transform = 'translateX(' + offset + 'px)';
 
-            const dotCount = Math.ceil(total / visibleCards);
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < dotCount; i++) {
-                const dot = document.createElement('button');
-                dot.className = 'slider-dot' + (i === Math.floor(currentIndex / visibleCards) ? ' active' : '');
-                dot.addEventListener('click', function() {
-                    currentIndex = i * visibleCards;
-                    updateSlider();
-                });
-                dotsContainer.appendChild(dot);
+            const dotCount = Math.ceil(total / topicsVisible);
+            if (topicsDots) {
+                topicsDots.innerHTML = '';
+                for (let i = 0; i < dotCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'slider-dot' + (i === Math.floor(topicsIndex / topicsVisible) ? ' active' : '');
+                    dot.addEventListener('click', function() {
+                        topicsIndex = i * topicsVisible;
+                        updateTopicsSlider();
+                    });
+                    topicsDots.appendChild(dot);
+                }
             }
         }
 
-        prevBtn.addEventListener('click', function() {
-            const step = getVisibleCards();
-            currentIndex = Math.max(0, currentIndex - step);
-            updateSlider();
-        });
-
-        nextBtn.addEventListener('click', function() {
-            const step = getVisibleCards();
-            const maxIndex = Math.max(0, getTotalCards() - getVisibleCards());
-            currentIndex = Math.min(maxIndex, currentIndex + step);
-            updateSlider();
-        });
+        if (topicsPrevBtn) {
+            topicsPrevBtn.addEventListener('click', function() {
+                const step = getTopicsVisible();
+                topicsIndex = Math.max(0, topicsIndex - step);
+                updateTopicsSlider();
+            });
+        }
+        if (topicsNextBtn) {
+            topicsNextBtn.addEventListener('click', function() {
+                const step = getTopicsVisible();
+                const maxIndex = Math.max(0, getTopicsTotal() - getTopicsVisible());
+                topicsIndex = Math.min(maxIndex, topicsIndex + step);
+                updateTopicsSlider();
+            });
+        }
 
         window.addEventListener('resize', function() {
-            const card = document.querySelector('.topic-card');
+            const card = document.querySelector('#topicsTrack .topic-card');
             if (card) {
-                const style = window.getComputedStyle(card);
                 const w = card.offsetWidth || 270;
-                const gap = parseFloat(style.marginLeft) || 28;
-                cardWidth = w + gap;
+                const gap = 28;
+                topicCardWidth = w + gap;
             }
-            updateSlider();
+            updateTopicsSlider();
         });
 
         setTimeout(function() {
-            const card = document.querySelector('.topic-card');
+            const card = document.querySelector('#topicsTrack .topic-card');
             if (card) {
-                const style = window.getComputedStyle(card);
                 const w = card.offsetWidth || 270;
-                const gap = parseFloat(style.marginLeft) || 28;
-                cardWidth = w + gap;
+                const gap = 28;
+                topicCardWidth = w + gap;
             }
-            updateSlider();
+            updateTopicsSlider();
+        }, 150);
+
+        // ===== MOVIE SLIDER =====
+        const movieTrack = document.getElementById('movieTrack');
+        const moviePrevBtn = document.getElementById('moviePrevBtn');
+        const movieNextBtn = document.getElementById('movieNextBtn');
+        const movieDots = document.getElementById('movieSliderDots');
+
+        let movieCardWidth = 340 + 32;
+        let moviesVisible = 3;
+        let movieIndex = 0;
+
+        function getMoviesVisible() {
+            const w = window.innerWidth;
+            if (w < 500) return 1;
+            if (w < 768) return 2;
+            if (w < 992) return 2;
+            return 3;
+        }
+
+        function getMoviesTotal() {
+            return document.querySelectorAll('#movieTrack .movie-card-slide').length;
+        }
+
+        function updateMovieSlider() {
+            const total = getMoviesTotal();
+            moviesVisible = getMoviesVisible();
+            const maxIndex = Math.max(0, total - moviesVisible);
+            if (movieIndex > maxIndex) movieIndex = maxIndex;
+            const offset = movieIndex * movieCardWidth;
+            if (movieTrack) movieTrack.style.transform = 'translateX(' + offset + 'px)';
+
+            const dotCount = Math.ceil(total / moviesVisible);
+            if (movieDots) {
+                movieDots.innerHTML = '';
+                for (let i = 0; i < dotCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'slider-dot' + (i === Math.floor(movieIndex / moviesVisible) ? ' active' : '');
+                    dot.addEventListener('click', function() {
+                        movieIndex = i * moviesVisible;
+                        updateMovieSlider();
+                    });
+                    movieDots.appendChild(dot);
+                }
+            }
+        }
+
+        if (moviePrevBtn) {
+            moviePrevBtn.addEventListener('click', function() {
+                const step = getMoviesVisible();
+                movieIndex = Math.max(0, movieIndex - step);
+                updateMovieSlider();
+            });
+        }
+        if (movieNextBtn) {
+            movieNextBtn.addEventListener('click', function() {
+                const step = getMoviesVisible();
+                const maxIndex = Math.max(0, getMoviesTotal() - getMoviesVisible());
+                movieIndex = Math.min(maxIndex, movieIndex + step);
+                updateMovieSlider();
+            });
+        }
+
+        window.addEventListener('resize', function() {
+            const card = document.querySelector('#movieTrack .movie-card-slide');
+            if (card) {
+                const w = card.offsetWidth || 340;
+                const gap = 32;
+                movieCardWidth = w + gap;
+            }
+            updateMovieSlider();
+        });
+
+        setTimeout(function() {
+            const card = document.querySelector('#movieTrack .movie-card-slide');
+            if (card) {
+                const w = card.offsetWidth || 340;
+                const gap = 32;
+                movieCardWidth = w + gap;
+            }
+            updateMovieSlider();
         }, 150);
 
         // ===== CONTACT FORM =====
