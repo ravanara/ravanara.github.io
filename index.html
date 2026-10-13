@@ -1316,6 +1316,88 @@
                 max-width: 180px;
             }
         }
+        /* ===== لینک‌های پنل در منو ===== */
+.nav-panel-link {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--sky) !important;
+    border: 1px solid rgba(126, 200, 227, .35);
+    padding: 6px 16px;
+    border-radius: 30px;
+    transition: all .25s;
+    display: inline-block;
+    line-height: 1.4;
+}
+.nav-panel-link:hover {
+    background: var(--sky);
+    color: var(--navy) !important;
+    border-color: var(--sky);
+}
+.nav.scrolled .nav-panel-link {
+    color: var(--blue) !important;
+    border-color: rgba(27, 79, 138, .3);
+}
+.nav.scrolled .nav-panel-link:hover {
+    background: var(--blue);
+    color: #fff !important;
+    border-color: var(--blue);
+}
+@media (max-width: 768px) {
+    .nav-panel-link {
+        font-size: 18px !important;
+        padding: 10px 28px;
+        border-width: 1.5px;
+    }
+}
+
+/* ===== لینک‌های پنل در فوتر ===== */
+.footer-panels {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    flex-wrap: wrap;
+}
+.footer-panels a {
+    font-size: 13px;
+    color: rgba(255, 255, 255, .5);
+    padding: 6px 18px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 30px;
+    transition: all .25s;
+    font-weight: 500;
+}
+.footer-panels a:hover {
+    color: var(--sky);
+    border-color: var(--sky);
+    background: rgba(126, 200, 227, .08);
+}
+        /* ===== لینک‌های پنل در فوتر ===== */
+.footer-panels {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    flex-wrap: wrap;
+}
+.footer-panels a {
+    font-size: 13px;
+    color: rgba(255, 255, 255, .5);
+    padding: 6px 18px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 30px;
+    transition: all .25s;
+    font-weight: 500;
+}
+.footer-panels a:hover {
+    color: var(--sky);
+    border-color: var(--sky);
+    background: rgba(126, 200, 227, .08);
+}
     </style>
 </head>
 <body>
@@ -1755,12 +1837,10 @@
         <div class="ravanara-text"><span class="sky">روان</span><span class="white">آرا</span> — سلامت باشید.</div>
         <div style="font-size:12px;margin-top:0.3rem;color:rgba(255,255,255,.4);">تمام حقوق محفوظ است © ۱۴۰۴</div>
         <div class="socials">
-            <div style="margin-top:1rem;display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;font-size:13px;">
-    <a href="https://script.google.com/macros/s/AKfycbyXXbL2_3KEXZXFH0Fxz09JeZUJspCc7h2VYxzhfl8gl_GDKJPeOf9h5bW0_MeIRxVCzQ/exec?page=client" target="_blank" style="color:rgba(255,255,255,.5);">
-        👤 پنل مراجع
-    </a>
-    <a href="https://script.google.com/macros/s/AKfycbyBa3FOwN3t_Y2mQnNkqULmBsknzL0mW-1H9z84xYPlDLyIA60lYzREjdAsz4SPdZzELg/exec" target="_blank" style="color:rgba(255,255,255,.5);">
-        📋 پنل پذیرش
+           <div class="footer-panels">
+    <a href="https://script.google.com/macros/s/AKfycbyXXbL2_3KEXZXFH0Fxz09JeZUJspCc7h2VYxzhfl8gl_GDKJPeOf9h5bW0_MeIRxVCzQ/exec?page=client" target="_blank">👤 ورود مراجع</a>
+    <a href="https://script.google.com/macros/s/AKfycbyBa3FOwN3t_Y2mQnNkqULmBsknzL0mW-1H9z84xYPlDLyIA60lYzREjdAsz4SPdZzELg/exec" target="_blank">📋 پنل پذیرش</a>
+</div>
     </a>
 </div>
             <a href="https://t.me/ravanarahbm" target="_blank" aria-label="تلگرام">📱</a>
